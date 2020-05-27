@@ -18,8 +18,8 @@ labels: 'request'
 ## Checklist
 
 <!--
-Carefully read and work through this check list in order to prevent the most common mistakes and misuse of youtube-dl:
-- First of, make sure you are using the latest version of youtube-dl. Run `youtube-dl --version` and ensure your version is 2020.05.08. If it's not, see https://yt-dl.org/update on how to update. Issues with outdated version will be REJECTED.
+Carefully read and work through this check list in order to prevent the most common mistakes and misuse of picta-dl:
+- First of, make sure you are using the latest version of picta-dl. Run `picta-dl --version` and ensure your version is 2020.05.08. If it's not, see https://yt-dl.org/update on how to update. Issues with outdated version will be REJECTED.
 - Search the bugtracker for similar feature requests: http://yt-dl.org/search-issues. DO NOT post duplicates.
 - Finally, put x into all relevant boxes (like this [x])
 -->

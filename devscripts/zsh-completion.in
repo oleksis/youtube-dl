@@ -1,4 +1,4 @@
-#compdef youtube-dl
+#compdef picta-dl
 
 __youtube_dl() {
     local curcontext="$curcontext" fileopts diropts cur prev

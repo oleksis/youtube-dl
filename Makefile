@@ -1,7 +1,7 @@
-all: youtube-dl README.md CONTRIBUTING.md README.txt youtube-dl.1 youtube-dl.bash-completion youtube-dl.zsh youtube-dl.fish supportedsites
+all: picta-dl README.md CONTRIBUTING.md README.txt picta-dl.1 picta-dl.bash-completion picta-dl.zsh picta-dl.fish supportedsites
 
 clean:
-	rm -rf youtube-dl.1.temp.md youtube-dl.1 youtube-dl.bash-completion README.txt MANIFEST build/ dist/ .coverage cover/ youtube-dl.tar.gz youtube-dl.zsh youtube-dl.fish youtube_dl/extractor/lazy_extractors.py *.dump *.part* *.ytdl *.info.json *.mp4 *.m4a *.flv *.mp3 *.avi *.mkv *.webm *.3gp *.wav *.ape *.swf *.jpg *.png CONTRIBUTING.md.tmp youtube-dl youtube-dl.exe
+	rm -rf picta-dl.1.temp.md picta-dl.1 picta-dl.bash-completion README.txt MANIFEST build/ dist/ .coverage cover/ picta-dl.tar.gz picta-dl.zsh picta-dl.fish picta_dl/extractor/lazy_extractors.py *.dump *.part* *.ytdl *.info.json *.mp4 *.m4a *.flv *.mp3 *.avi *.mkv *.webm *.3gp *.wav *.ape *.swf *.jpg *.png CONTRIBUTING.md.tmp picta-dl picta-dl.exe
 	find . -name "*.pyc" -delete
 	find . -name "*.class" -delete
 
@@ -17,23 +17,23 @@ SYSCONFDIR = $(shell if [ $(PREFIX) = /usr -o $(PREFIX) = /usr/local ]; then ech
 # set markdown input format to "markdown-smart" for pandoc version 2 and to "markdown" for pandoc prior to version 2
 MARKDOWN = $(shell if [ `pandoc -v | head -n1 | cut -d" " -f2 | head -c1` = "2" ]; then echo markdown-smart; else echo markdown; fi)
 
-install: youtube-dl youtube-dl.1 youtube-dl.bash-completion youtube-dl.zsh youtube-dl.fish
+install: picta-dl picta-dl.1 picta-dl.bash-completion picta-dl.zsh picta-dl.fish
 	install -d $(DESTDIR)$(BINDIR)
-	install -m 755 youtube-dl $(DESTDIR)$(BINDIR)
+	install -m 755 picta-dl $(DESTDIR)$(BINDIR)
 	install -d $(DESTDIR)$(MANDIR)/man1
-	install -m 644 youtube-dl.1 $(DESTDIR)$(MANDIR)/man1
+	install -m 644 picta-dl.1 $(DESTDIR)$(MANDIR)/man1
 	install -d $(DESTDIR)$(SYSCONFDIR)/bash_completion.d
-	install -m 644 youtube-dl.bash-completion $(DESTDIR)$(SYSCONFDIR)/bash_completion.d/youtube-dl
+	install -m 644 picta-dl.bash-completion $(DESTDIR)$(SYSCONFDIR)/bash_completion.d/picta-dl
 	install -d $(DESTDIR)$(SHAREDIR)/zsh/site-functions
-	install -m 644 youtube-dl.zsh $(DESTDIR)$(SHAREDIR)/zsh/site-functions/_youtube-dl
+	install -m 644 picta-dl.zsh $(DESTDIR)$(SHAREDIR)/zsh/site-functions/_picta-dl
 	install -d $(DESTDIR)$(SYSCONFDIR)/fish/completions
-	install -m 644 youtube-dl.fish $(DESTDIR)$(SYSCONFDIR)/fish/completions/youtube-dl.fish
+	install -m 644 picta-dl.fish $(DESTDIR)$(SYSCONFDIR)/fish/completions/picta-dl.fish
 
 codetest:
 	flake8 .
 
 test:
-	#nosetests --with-coverage --cover-package=youtube_dl --cover-html --verbose --processes 4 test
+	#nosetests --with-coverage --cover-package=picta_dl --cover-html --verbose --processes 4 test
 	nosetests --verbose test
 	$(MAKE) codetest
 
@@ -51,34 +51,34 @@ offlinetest: codetest
 		--exclude test_youtube_lists.py \
 		--exclude test_youtube_signature.py
 
-tar: youtube-dl.tar.gz
+tar: picta-dl.tar.gz
 
 .PHONY: all clean install test tar bash-completion pypi-files zsh-completion fish-completion ot offlinetest codetest supportedsites
 
-pypi-files: youtube-dl.bash-completion README.txt youtube-dl.1 youtube-dl.fish
+pypi-files: picta-dl.bash-completion README.txt picta-dl.1 picta-dl.fish
 
-youtube-dl: youtube_dl/*.py youtube_dl/*/*.py
+picta-dl: picta_dl/*.py picta_dl/*/*.py
 	mkdir -p zip
-	for d in youtube_dl youtube_dl/downloader youtube_dl/extractor youtube_dl/postprocessor ; do \
+	for d in picta_dl picta_dl/downloader picta_dl/extractor picta_dl/postprocessor ; do \
 	  mkdir -p zip/$$d ;\
 	  cp -pPR $$d/*.py zip/$$d/ ;\
 	done
-	touch -t 200001010101 zip/youtube_dl/*.py zip/youtube_dl/*/*.py
-	mv zip/youtube_dl/__main__.py zip/
-	cd zip ; zip -q ../youtube-dl youtube_dl/*.py youtube_dl/*/*.py __main__.py
+	touch -t 200001010101 zip/picta_dl/*.py zip/picta_dl/*/*.py
+	mv zip/picta_dl/__main__.py zip/
+	cd zip ; zip -q ../picta-dl picta_dl/*.py picta_dl/*/*.py __main__.py
 	rm -rf zip
-	echo '#!$(PYTHON)' > youtube-dl
-	cat youtube-dl.zip >> youtube-dl
-	rm youtube-dl.zip
-	chmod a+x youtube-dl
+	echo '#!$(PYTHON)' > picta-dl
+	cat picta-dl.zip >> picta-dl
+	rm picta-dl.zip
+	chmod a+x picta-dl
 
-README.md: youtube_dl/*.py youtube_dl/*/*.py
-	COLUMNS=80 $(PYTHON) youtube_dl/__main__.py --help | $(PYTHON) devscripts/make_readme.py
+README.md: picta_dl/*.py picta_dl/*/*.py
+	COLUMNS=80 $(PYTHON) picta_dl/__main__.py --help | $(PYTHON) devscripts/make_readme.py
 
 CONTRIBUTING.md: README.md
 	$(PYTHON) devscripts/make_contributing.py README.md CONTRIBUTING.md
 
-issuetemplates: devscripts/make_issue_template.py .github/ISSUE_TEMPLATE_tmpl/1_broken_site.md .github/ISSUE_TEMPLATE_tmpl/2_site_support_request.md .github/ISSUE_TEMPLATE_tmpl/3_site_feature_request.md .github/ISSUE_TEMPLATE_tmpl/4_bug_report.md .github/ISSUE_TEMPLATE_tmpl/5_feature_request.md youtube_dl/version.py
+issuetemplates: devscripts/make_issue_template.py .github/ISSUE_TEMPLATE_tmpl/1_broken_site.md .github/ISSUE_TEMPLATE_tmpl/2_site_support_request.md .github/ISSUE_TEMPLATE_tmpl/3_site_feature_request.md .github/ISSUE_TEMPLATE_tmpl/4_bug_report.md .github/ISSUE_TEMPLATE_tmpl/5_feature_request.md picta_dl/version.py
 	$(PYTHON) devscripts/make_issue_template.py .github/ISSUE_TEMPLATE_tmpl/1_broken_site.md .github/ISSUE_TEMPLATE/1_broken_site.md
 	$(PYTHON) devscripts/make_issue_template.py .github/ISSUE_TEMPLATE_tmpl/2_site_support_request.md .github/ISSUE_TEMPLATE/2_site_support_request.md
 	$(PYTHON) devscripts/make_issue_template.py .github/ISSUE_TEMPLATE_tmpl/3_site_feature_request.md .github/ISSUE_TEMPLATE/3_site_feature_request.md
@@ -91,34 +91,34 @@ supportedsites:
 README.txt: README.md
 	pandoc -f $(MARKDOWN) -t plain README.md -o README.txt
 
-youtube-dl.1: README.md
-	$(PYTHON) devscripts/prepare_manpage.py youtube-dl.1.temp.md
-	pandoc -s -f $(MARKDOWN) -t man youtube-dl.1.temp.md -o youtube-dl.1
-	rm -f youtube-dl.1.temp.md
+picta-dl.1: README.md
+	$(PYTHON) devscripts/prepare_manpage.py picta-dl.1.temp.md
+	pandoc -s -f $(MARKDOWN) -t man picta-dl.1.temp.md -o picta-dl.1
+	rm -f picta-dl.1.temp.md
 
-youtube-dl.bash-completion: youtube_dl/*.py youtube_dl/*/*.py devscripts/bash-completion.in
+picta-dl.bash-completion: picta_dl/*.py picta_dl/*/*.py devscripts/bash-completion.in
 	$(PYTHON) devscripts/bash-completion.py
 
-bash-completion: youtube-dl.bash-completion
+bash-completion: picta-dl.bash-completion
 
-youtube-dl.zsh: youtube_dl/*.py youtube_dl/*/*.py devscripts/zsh-completion.in
+picta-dl.zsh: picta_dl/*.py picta_dl/*/*.py devscripts/zsh-completion.in
 	$(PYTHON) devscripts/zsh-completion.py
 
-zsh-completion: youtube-dl.zsh
+zsh-completion: picta-dl.zsh
 
-youtube-dl.fish: youtube_dl/*.py youtube_dl/*/*.py devscripts/fish-completion.in
+picta-dl.fish: picta_dl/*.py picta_dl/*/*.py devscripts/fish-completion.in
 	$(PYTHON) devscripts/fish-completion.py
 
-fish-completion: youtube-dl.fish
+fish-completion: picta-dl.fish
 
-lazy-extractors: youtube_dl/extractor/lazy_extractors.py
+lazy-extractors: picta_dl/extractor/lazy_extractors.py
 
-_EXTRACTOR_FILES = $(shell find youtube_dl/extractor -iname '*.py' -and -not -iname 'lazy_extractors.py')
-youtube_dl/extractor/lazy_extractors.py: devscripts/make_lazy_extractors.py devscripts/lazy_load_template.py $(_EXTRACTOR_FILES)
+_EXTRACTOR_FILES = $(shell find picta_dl/extractor -iname '*.py' -and -not -iname 'lazy_extractors.py')
+picta_dl/extractor/lazy_extractors.py: devscripts/make_lazy_extractors.py devscripts/lazy_load_template.py $(_EXTRACTOR_FILES)
 	$(PYTHON) devscripts/make_lazy_extractors.py $@
 
-youtube-dl.tar.gz: youtube-dl README.md README.txt youtube-dl.1 youtube-dl.bash-completion youtube-dl.zsh youtube-dl.fish ChangeLog AUTHORS
-	@tar -czf youtube-dl.tar.gz --transform "s|^|youtube-dl/|" --owner 0 --group 0 \
+picta-dl.tar.gz: picta-dl README.md README.txt picta-dl.1 picta-dl.bash-completion picta-dl.zsh picta-dl.fish ChangeLog AUTHORS
+	@tar -czf picta-dl.tar.gz --transform "s|^|picta-dl/|" --owner 0 --group 0 \
 		--exclude '*.DS_Store' \
 		--exclude '*.kate-swp' \
 		--exclude '*.pyc' \
@@ -128,8 +128,8 @@ youtube-dl.tar.gz: youtube-dl README.md README.txt youtube-dl.1 youtube-dl.bash-
 		--exclude '.git' \
 		--exclude 'docs/_build' \
 		-- \
-		bin devscripts test youtube_dl docs \
+		bin devscripts test picta_dl docs \
 		ChangeLog AUTHORS LICENSE README.md README.txt \
-		Makefile MANIFEST.in youtube-dl.1 youtube-dl.bash-completion \
-		youtube-dl.zsh youtube-dl.fish setup.py setup.cfg \
-		youtube-dl
+		Makefile MANIFEST.in picta-dl.1 picta-dl.bash-completion \
+		picta-dl.zsh picta-dl.fish setup.py setup.cfg \
+		picta-dl

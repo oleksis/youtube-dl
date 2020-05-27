@@ -8,15 +8,15 @@ import re
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 README_FILE = os.path.join(ROOT_DIR, 'README.md')
 
-PREFIX = r'''%YOUTUBE-DL(1)
+PREFIX = r'''%PICTA-DL(1)
 
 # NAME
 
-youtube\-dl \- download videos from youtube.com or other video platforms
+picta\-dl \- download videos from picta.cu Plataforma de Contenidos Audiovisuales
 
 # SYNOPSIS
 
-**youtube-dl** \[OPTIONS\] URL [URL...]
+**picta-dl** \[OPTIONS\] URL [URL...]
 
 '''
 
@@ -33,7 +33,7 @@ def main():
         readme = f.read()
 
     readme = re.sub(r'(?s)^.*?(?=# DESCRIPTION)', '', readme)
-    readme = re.sub(r'\s+youtube-dl \[OPTIONS\] URL \[URL\.\.\.\]', '', readme)
+    readme = re.sub(r'\s+picta-dl \[OPTIONS\] URL \[URL\.\.\.\]', '', readme)
     readme = PREFIX + readme
 
     readme = filter_options(readme)

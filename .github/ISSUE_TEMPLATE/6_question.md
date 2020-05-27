@@ -18,7 +18,7 @@ labels: 'question'
 ## Checklist
 
 <!--
-Carefully read and work through this check list in order to prevent the most common mistakes and misuse of youtube-dl:
+Carefully read and work through this check list in order to prevent the most common mistakes and misuse of picta-dl:
 - Look through the README (http://yt-dl.org/readme) and FAQ (http://yt-dl.org/faq) for similar questions
 - Search the bugtracker for similar questions: http://yt-dl.org/search-issues
 - Finally, put x into all relevant boxes (like this [x])

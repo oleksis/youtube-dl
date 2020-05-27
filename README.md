@@ -1026,7 +1026,7 @@ After you have ensured this site is distributing its content legally, you can fo
                 'title': title,
                 'description': self._og_search_description(webpage),
                 'uploader': self._search_regex(r'<div[^>]+id="uploader"[^>]*>([^<]+)<', webpage, 'uploader', fatal=False),
-                # TODO more properties (see youtube_dl/extractor/common.py)
+                picta_dl
             }
     ```
 5. Add an import in [`youtube_dl/extractor/extractors.py`](https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/extractor/extractors.py).
@@ -1319,10 +1319,10 @@ From a Python program, you can embed youtube-dl in a more powerful fashion, like
 
 ```python
 from __future__ import unicode_literals
-import youtube_dl
+import picta_dl
 
 ydl_opts = {}
-with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+with picta_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download(['https://www.youtube.com/watch?v=BaW_jenozKc'])
 ```
 
@@ -1332,7 +1332,7 @@ Here's a more complete example of a program that outputs only errors (and a shor
 
 ```python
 from __future__ import unicode_literals
-import youtube_dl
+import picta_dl
 
 
 class MyLogger(object):
@@ -1361,7 +1361,7 @@ ydl_opts = {
     'logger': MyLogger(),
     'progress_hooks': [my_hook],
 }
-with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+with picta_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download(['https://www.youtube.com/watch?v=BaW_jenozKc'])
 ```
 

@@ -10,10 +10,10 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from test.helper import http_server_port, try_rm
-from youtube_dl import YoutubeDL
-from youtube_dl.compat import compat_http_server
-from youtube_dl.downloader.http import HttpFD
-from youtube_dl.utils import encodeFilename
+from picta_dl import YoutubeDL
+from picta_dl.compat import compat_http_server
+from picta_dl.downloader.http import HttpFD
+from picta_dl.utils import encodeFilename
 import threading
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))

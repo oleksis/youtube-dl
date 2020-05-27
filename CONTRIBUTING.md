@@ -147,7 +147,7 @@ After you have ensured this site is distributing its content legally, you can fo
                 'title': title,
                 'description': self._og_search_description(webpage),
                 'uploader': self._search_regex(r'<div[^>]+id="uploader"[^>]*>([^<]+)<', webpage, 'uploader', fatal=False),
-                # TODO more properties (see youtube_dl/extractor/common.py)
+                picta_dl
             }
     ```
 5. Add an import in [`youtube_dl/extractor/extractors.py`](https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/extractor/extractors.py).

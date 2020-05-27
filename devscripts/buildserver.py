@@ -12,7 +12,7 @@ import traceback
 import os.path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))
-from youtube_dl.compat import (
+from picta_dl.compat import (
     compat_input,
     compat_http_server,
     compat_str,
@@ -322,10 +322,10 @@ class GITBuilder(GITInfoBuilder):
 
 
 class YoutubeDLBuilder(object):
-    authorizedUsers = ['fraca7', 'phihag', 'rg3', 'FiloSottile', 'ytdl-org']
+    authorizedUsers = ['oleksis']
 
     def __init__(self, **kwargs):
-        if self.repoName != 'youtube-dl':
+        if self.repoName != 'picta-dl':
             raise BuildError('Invalid repository "%s"' % self.repoName)
         if self.user not in self.authorizedUsers:
             raise HTTPError('Unauthorized user "%s"' % self.user, 401)

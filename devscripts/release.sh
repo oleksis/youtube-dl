@@ -53,7 +53,7 @@ fi
 
 if [ ! -z "`git tag | grep "$version"`" ]; then echo 'ERROR: version already present'; exit 1; fi
 if [ ! -z "`git status --porcelain | grep -v CHANGELOG`" ]; then echo 'ERROR: the working directory is not clean; commit or stash changes'; exit 1; fi
-useless_files=$(find youtube_dl -type f -not -name '*.py')
+useless_files=$(find picta_dl -type f -not -name '*.py')
 if [ ! -z "$useless_files" ]; then echo "ERROR: Non-.py files in youtube_dl: $useless_files"; exit 1; fi
 if [ ! -f "updates_key.pem" ]; then echo 'ERROR: updates_key.pem missing'; exit 1; fi
 if ! type pandoc >/dev/null 2>/dev/null; then echo 'ERROR: pandoc is missing'; exit 1; fi
@@ -68,18 +68,18 @@ make clean
 if $skip_tests ; then
     echo 'SKIPPING TESTS'
 else
-    nosetests --verbose --with-coverage --cover-package=youtube_dl --cover-html test --stop || exit 1
+    nosetests --verbose --with-coverage --cover-package=picta_dl --cover-html test --stop || exit 1
 fi
 
 /bin/echo -e "\n### Changing version in version.py..."
-sed -i "s/__version__ = '.*'/__version__ = '$version'/" youtube_dl/version.py
+sed -i "s/__version__ = '.*'/__version__ = '$version'/" picta_dl/version.py
 
 /bin/echo -e "\n### Changing version in ChangeLog..."
 sed -i "s/<unreleased>/$version/" ChangeLog
 
 /bin/echo -e "\n### Committing documentation, templates and youtube_dl/version.py..."
 make README.md CONTRIBUTING.md issuetemplates supportedsites
-git add README.md CONTRIBUTING.md .github/ISSUE_TEMPLATE/1_broken_site.md .github/ISSUE_TEMPLATE/2_site_support_request.md .github/ISSUE_TEMPLATE/3_site_feature_request.md .github/ISSUE_TEMPLATE/4_bug_report.md .github/ISSUE_TEMPLATE/5_feature_request.md .github/ISSUE_TEMPLATE/6_question.md docs/supportedsites.md youtube_dl/version.py ChangeLog
+git add README.md CONTRIBUTING.md .github/ISSUE_TEMPLATE/1_broken_site.md .github/ISSUE_TEMPLATE/2_site_support_request.md .github/ISSUE_TEMPLATE/3_site_feature_request.md .github/ISSUE_TEMPLATE/4_bug_report.md .github/ISSUE_TEMPLATE/5_feature_request.md .github/ISSUE_TEMPLATE/6_question.md docs/supportedsites.md picta_dl/version.py ChangeLog
 git commit $gpg_sign_commits -m "release $version"
 
 /bin/echo -e "\n### Now tagging, signing and pushing..."
@@ -94,12 +94,12 @@ git push origin "$version"
 
 /bin/echo -e "\n### OK, now it is time to build the binaries..."
 REV=$(git rev-parse HEAD)
-make youtube-dl youtube-dl.tar.gz
+make picta-dl picta-dl.tar.gz
 read -p "VM running? (y/n) " -n 1
-wget "http://$buildserver/build/ytdl-org/youtube-dl/youtube-dl.exe?rev=$REV" -O youtube-dl.exe
+wget "http://$buildserver/build/ytdl-org/youtube-dl/youtube-dl.exe?rev=$REV" -O picta-dl.exe
 mkdir -p "build/$version"
-mv youtube-dl youtube-dl.exe "build/$version"
-mv youtube-dl.tar.gz "build/$version/youtube-dl-$version.tar.gz"
+mv picta-dl picta-dl.exe "build/$version"
+mv picta-dl.tar.gz "build/$version/youtube-dl-$version.tar.gz"
 RELEASE_FILES="youtube-dl youtube-dl.exe youtube-dl-$version.tar.gz"
 (cd build/$version/ && md5sum $RELEASE_FILES > MD5SUMS)
 (cd build/$version/ && sha1sum $RELEASE_FILES > SHA1SUMS)

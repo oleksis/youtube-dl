@@ -11,7 +11,7 @@ atom_template = textwrap.dedent("""\
     <?xml version="1.0" encoding="utf-8"?>
     <feed xmlns="http://www.w3.org/2005/Atom">
         <link rel="self" href="http://ytdl-org.github.io/youtube-dl/update/releases.atom" />
-        <title>youtube-dl releases</title>
+        <title>picta-dl releases</title>
         <id>https://yt-dl.org/feed/youtube-dl-updates-feed</id>
         <updated>@TIMESTAMP@</updated>
         @ENTRIES@
@@ -28,7 +28,7 @@ entry_template = textwrap.dedent("""
             </div>
         </content>
         <author>
-            <name>The youtube-dl maintainers</name>
+            <name>The picta-dl maintainers</name>
         </author>
         <updated>@TIMESTAMP@</updated>
     </entry>
