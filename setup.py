@@ -38,8 +38,8 @@ py2exe_options = {
 exec(compile(open('picta_dl/version.py').read(),
              'picta_dl/version.py', 'exec'))
 
-DESCRIPTION = 'YouTube video downloader'
-LONG_DESCRIPTION = 'Command-line program to download videos from YouTube.com and other video sites'
+DESCRIPTION = 'Picta video downloader'
+LONG_DESCRIPTION = 'Command-line program to download videos from YouTube.com and Picta.cu Plataforma de Contenidos Audiovisuales'
 
 py2exe_console = [{
     'script': './picta_dl/__main__.py',
@@ -109,7 +109,7 @@ setup(
     version=__version__,
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
-    url='https://github.com/oleksis/youtube-dl',
+    url='https://github.com/oleksis/youtube-dl/tree/Picta-DL',
     author='Ricardo Garcia',
     author_email='ytdl@yt-dl.org',
     maintainer='Oleksis Fraga',
