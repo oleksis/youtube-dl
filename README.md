@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.org/ytdl-org/youtube-dl)
 
-youtube-dl - download videos from youtube.com or other video platforms
+picta-dl - download videos from youtube.com and picta.cu Plataforma de Contenidos Audiovisuales
 
 - [INSTALLATION](#installation)
 - [DESCRIPTION](#description)
@@ -31,24 +31,24 @@ Windows users can [download an .exe file](https://yt-dl.org/latest/youtube-dl.ex
 
 You can also use pip:
 
-    sudo -H pip install --upgrade youtube-dl
+    sudo -H pip install --upgrade picta-dl
     
-This command will update youtube-dl if you have already installed it. See the [pypi page](https://pypi.python.org/pypi/youtube_dl) for more information.
+This command will update picta-dl if you have already installed it. See the [pypi page](https://pypi.python.org/pypi/youtube_dl) for more information.
 
-macOS users can install youtube-dl with [Homebrew](https://brew.sh/):
+macOS users can install picta-dl with [Homebrew](https://brew.sh/):
 
-    brew install youtube-dl
+    brew install picta-dl
 
 Or with [MacPorts](https://www.macports.org/):
 
-    sudo port install youtube-dl
+    sudo port install picta-dl
 
 Alternatively, refer to the [developer instructions](#developer-instructions) for how to check out and work with the git repository. For further options, including PGP signatures, see the [youtube-dl Download Page](https://ytdl-org.github.io/youtube-dl/download.html).
 
 # DESCRIPTION
-**youtube-dl** is a command-line program to download videos from YouTube.com and a few more sites. It requires the Python interpreter, version 2.6, 2.7, or 3.2+, and it is not platform specific. It should work on your Unix box, on Windows or on macOS. It is released to the public domain, which means you can modify it, redistribute it or use it however you like.
+**picta-dl** is a command-line program to download videos from YouTube.com and Picta.cu Plataforma de Contenidos Audiovisuales. It requires the Python interpreter, version 2.6, 2.7, or 3.2+, and it is not platform specific. It should work on your Unix box, on Windows or on macOS. It is released to the public domain, which means you can modify it, redistribute it or use it however you like.
 
-    youtube-dl [OPTIONS] URL [URL...]
+    picta-dl [OPTIONS] URL [URL...]
 
 # OPTIONS
     -h, --help                       Print this help text and exit
@@ -69,18 +69,18 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
                                      extractor
     --default-search PREFIX          Use this prefix for unqualified URLs. For
                                      example "gvsearch2:" downloads two videos
-                                     from google videos for youtube-dl "large
+                                     from google videos for picta-dl "large
                                      apple". Use the value "auto" to let
-                                     youtube-dl guess ("auto_warning" to emit a
+                                     picta-dl guess ("auto_warning" to emit a
                                      warning when guessing). "error" just throws
                                      an error. The default value "fixup_error"
                                      repairs broken URLs, but emits an error if
                                      this is not possible instead of searching.
     --ignore-config                  Do not read configuration files. When given
                                      in the global configuration file
-                                     /etc/youtube-dl.conf: Do not read the user
-                                     configuration in ~/.config/youtube-
-                                     dl/config (%APPDATA%/youtube-dl/config.txt
+                                     /etc/picta-dl.conf: Do not read the user
+                                     configuration in ~/.config/picta-
+                                     dl/config (%APPDATA%/picta-dl/config.txt
                                      on Windows)
     --config-location PATH           Location of the configuration file; either
                                      the path to the config or its containing
@@ -238,7 +238,7 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
                                      filenames
     -w, --no-overwrites              Do not overwrite files
     -c, --continue                   Force resume of partially downloaded files.
-                                     By default, youtube-dl will resume
+                                     By default, picta-dl will resume
                                      downloads if possible.
     --no-continue                    Do not resume partially downloaded files
                                      (restart from beginning)
@@ -256,11 +256,11 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
                                      option)
     --cookies FILE                   File to read cookies from and dump cookie
                                      jar in
-    --cache-dir DIR                  Location in the filesystem where youtube-dl
+    --cache-dir DIR                  Location in the filesystem where picta-dl
                                      can store some downloaded information
                                      permanently. By default
-                                     $XDG_CACHE_HOME/youtube-dl or
-                                     ~/.cache/youtube-dl . At the moment, only
+                                     $XDG_CACHE_HOME/picta-dl or
+                                     ~/.cache/picta-dl . At the moment, only
                                      YouTube player files (for videos with
                                      obfuscated signatures) are cached, but that
                                      may change.
@@ -306,8 +306,8 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
                                      files in the current directory to debug
                                      problems
     --print-traffic                  Display sent and read HTTP traffic
-    -C, --call-home                  Contact the youtube-dl server for debugging
-    --no-call-home                   Do NOT contact the youtube-dl server for
+    -C, --call-home                  Contact the picta-dl server for debugging
+    --no-call-home                   Do NOT contact the picta-dl server for
                                      debugging
 
 ## Workarounds:
@@ -368,7 +368,7 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
 ## Authentication Options:
     -u, --username USERNAME          Login with this account ID
     -p, --password PASSWORD          Account password. If this option is left
-                                     out, youtube-dl will ask interactively.
+                                     out, picta-dl will ask interactively.
     -2, --twofactor TWOFACTOR        Two-factor authentication code
     -n, --netrc                      Use .netrc authentication data
     --video-password PASSWORD        Video password (vimeo, smotri, youku)
@@ -379,7 +379,7 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
                                      a list of available MSOs
     --ap-username USERNAME           Multiple-system operator account login
     --ap-password PASSWORD           Multiple-system operator account password.
-                                     If this option is left out, youtube-dl will
+                                     If this option is left out, picta-dl will
                                      ask interactively.
     --ap-list-mso                    List all supported multiple-system
                                      operators
@@ -442,9 +442,9 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
 
 # CONFIGURATION
 
-You can configure youtube-dl by placing any supported command line option to a configuration file. On Linux and macOS, the system wide configuration file is located at `/etc/youtube-dl.conf` and the user wide configuration file at `~/.config/youtube-dl/config`. On Windows, the user wide configuration file locations are `%APPDATA%\youtube-dl\config.txt` or `C:\Users\<user name>\youtube-dl.conf`. Note that by default configuration file may not exist so you may need to create it yourself.
+You can configure picta-dl by placing any supported command line option to a configuration file. On Linux and macOS, the system wide configuration file is located at `/etc/picta-dl.conf` and the user wide configuration file at `~/.config/picta-dl/config`. On Windows, the user wide configuration file locations are `%APPDATA%\picta-dl\config.txt` or `C:\Users\<user name>\picta-dl.conf`. Note that by default configuration file may not exist so you may need to create it yourself.
 
-For example, with the following configuration file youtube-dl will always extract the audio, not copy the mtime, use a proxy and save all videos under `Movies` directory in your home directory:
+For example, with the following configuration file picta-dl will always extract the audio, not copy the mtime, use a proxy and save all videos under `Movies` directory in your home directory:
 ```
 # Lines starting with # are comments
 
@@ -463,13 +463,13 @@ For example, with the following configuration file youtube-dl will always extrac
 
 Note that options in configuration file are just the same options aka switches used in regular command line calls thus there **must be no whitespace** after `-` or `--`, e.g. `-o` or `--proxy` but not `- o` or `-- proxy`.
 
-You can use `--ignore-config` if you want to disable the configuration file for a particular youtube-dl run.
+You can use `--ignore-config` if you want to disable the configuration file for a particular picta-dl run.
 
-You can also use `--config-location` if you want to use custom configuration file for a particular youtube-dl run.
+You can also use `--config-location` if you want to use custom configuration file for a particular picta-dl run.
 
 ### Authentication with `.netrc` file
 
-You may also want to configure automatic credentials storage for extractors that support authentication (by providing login and password with `--username` and `--password`) in order not to pass credentials as command line arguments on every youtube-dl execution and prevent tracking plain text passwords in the shell command history. You can achieve this using a [`.netrc` file](https://stackoverflow.com/tags/.netrc/info) on a per extractor basis. For that you will need to create a `.netrc` file in your `$HOME` and restrict permissions to read/write by only you:
+You may also want to configure automatic credentials storage for extractors that support authentication (by providing login and password with `--username` and `--password`) in order not to pass credentials as command line arguments on every picta-dl execution and prevent tracking plain text passwords in the shell command history. You can achieve this using a [`.netrc` file](https://stackoverflow.com/tags/.netrc/info) on a per extractor basis. For that you will need to create a `.netrc` file in your `$HOME` and restrict permissions to read/write by only you:
 ```
 touch $HOME/.netrc
 chmod a-rwx,u+rw $HOME/.netrc
@@ -483,7 +483,7 @@ For example:
 machine youtube login myaccount@gmail.com password my_youtube_password
 machine twitch login my_twitch_account_name password my_twitch_password
 ```
-To activate authentication with the `.netrc` file you should pass `--netrc` to youtube-dl or place it in the [configuration file](#configuration).
+To activate authentication with the `.netrc` file you should pass `--netrc` to picta-dl or place it in the [configuration file](#configuration).
 
 On Windows you may also need to setup the `%HOME%` environment variable manually. For example:
 ```
@@ -496,7 +496,7 @@ The `-o` option allows users to indicate a template for the output file names.
 
 **tl;dr:** [navigate me to examples](#output-template-examples).
 
-The basic usage is not to set any template arguments when downloading a single file, like in `youtube-dl -o funny_video.flv "https://some/video"`. However, it may contain special sequences that will be replaced when downloading each video. The special sequences may be formatted according to [python string formatting operations](https://docs.python.org/2/library/stdtypes.html#string-formatting). For example, `%(NAME)s` or `%(NAME)05d`. To clarify, that is a percent symbol followed by a name in parentheses, followed by formatting operations. Allowed names along with sequence type are:
+The basic usage is not to set any template arguments when downloading a single file, like in `picta-dl -o funny_video.flv "https://some/video"`. However, it may contain special sequences that will be replaced when downloading each video. The special sequences may be formatted according to [python string formatting operations](https://docs.python.org/2/library/stdtypes.html#string-formatting). For example, `%(NAME)s` or `%(NAME)05d`. To clarify, that is a percent symbol followed by a name in parentheses, followed by formatting operations. Allowed names along with sequence type are:
 
  - `id` (string): Video identifier
  - `title` (string): Video title
@@ -584,7 +584,7 @@ Available for the media that is a track or a part of a music album:
 
 Each aforementioned sequence when referenced in an output template will be replaced by the actual value corresponding to the sequence name. Note that some of the sequences are not guaranteed to be present since they depend on the metadata obtained by a particular extractor. Such sequences will be replaced with `NA`.
 
-For example for `-o %(title)s-%(id)s.%(ext)s` and an mp4 video with title `youtube-dl test video` and id `BaW_jenozKcj`, this will result in a `youtube-dl test video-BaW_jenozKcj.mp4` file created in the current directory.
+For example for `-o %(title)s-%(id)s.%(ext)s` and an mp4 video with title `picta-dl test video` and id `BaW_jenozKcj`, this will result in a `picta-dl test video-BaW_jenozKcj.mp4` file created in the current directory.
 
 For numeric sequences you can use numeric related formatting, for example, `%(view_count)05d` will result in a string with view count padded with zeros up to 5 characters, like in `00042`.
 
@@ -605,31 +605,31 @@ If you are using an output template inside a Windows batch file then you must es
 Note that on Windows you may need to use double quotes instead of single.
 
 ```bash
-$ youtube-dl --get-filename -o '%(title)s.%(ext)s' BaW_jenozKc
-youtube-dl test video ''_ä↭𝕐.mp4    # All kinds of weird characters
+$ picta-dl --get-filename -o '%(title)s.%(ext)s' BaW_jenozKc
+picta-dl test video ''_ä↭𝕐.mp4    # All kinds of weird characters
 
-$ youtube-dl --get-filename -o '%(title)s.%(ext)s' BaW_jenozKc --restrict-filenames
-youtube-dl_test_video_.mp4          # A simple file name
+$ picta-dl --get-filename -o '%(title)s.%(ext)s' BaW_jenozKc --restrict-filenames
+picta-dl_test_video_.mp4          # A simple file name
 
 # Download YouTube playlist videos in separate directory indexed by video order in a playlist
-$ youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re
+$ picta-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re
 
 # Download all playlists of YouTube channel/user keeping each playlist in separate directory:
-$ youtube-dl -o '%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' https://www.youtube.com/user/TheLinuxFoundation/playlists
+$ picta-dl -o '%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' https://www.youtube.com/user/TheLinuxFoundation/playlists
 
 # Download Udemy course keeping each chapter in separate directory under MyVideos directory in your home
-$ youtube-dl -u user -p password -o '~/MyVideos/%(playlist)s/%(chapter_number)s - %(chapter)s/%(title)s.%(ext)s' https://www.udemy.com/java-tutorial/
+$ picta-dl -u user -p password -o '~/MyVideos/%(playlist)s/%(chapter_number)s - %(chapter)s/%(title)s.%(ext)s' https://www.udemy.com/java-tutorial/
 
 # Download entire series season keeping each series and each season in separate directory under C:/MyVideos
-$ youtube-dl -o "C:/MyVideos/%(series)s/%(season_number)s - %(season)s/%(episode_number)s - %(episode)s.%(ext)s" https://videomore.ru/kino_v_detalayah/5_sezon/367617
+$ picta-dl -o "C:/MyVideos/%(series)s/%(season_number)s - %(season)s/%(episode_number)s - %(episode)s.%(ext)s" https://videomore.ru/kino_v_detalayah/5_sezon/367617
 
 # Stream the video being downloaded to stdout
-$ youtube-dl -o - BaW_jenozKc
+$ picta-dl -o - BaW_jenozKc
 ```
 
 # FORMAT SELECTION
 
-By default youtube-dl tries to download the best available quality, i.e. if you want the best quality you **don't need** to pass any special options, youtube-dl will guess it for you by **default**.
+By default picta-dl tries to download the best available quality, i.e. if you want the best quality you **don't need** to pass any special options, picta-dl will guess it for you by **default**.
 
 But sometimes you may want to download in a different format, for example when you are on a slow or intermittent connection. The key mechanism for achieving this is so-called *format selection* based on which you can explicitly specify desired format, select formats based on some criterion or criteria, setup precedence and much more.
 
@@ -688,9 +688,9 @@ You can merge the video and audio of two formats into a single file using `-f <v
 
 Format selectors can also be grouped using parentheses, for example if you want to download the best mp4 and webm formats with a height lower than 480 you can use `-f '(mp4,webm)[height<480]'`.
 
-Since the end of April 2015 and version 2015.04.26, youtube-dl uses `-f bestvideo+bestaudio/best` as the default format selection (see [#5447](https://github.com/ytdl-org/youtube-dl/issues/5447), [#5456](https://github.com/ytdl-org/youtube-dl/issues/5456)). If ffmpeg or avconv are installed this results in downloading `bestvideo` and `bestaudio` separately and muxing them together into a single file giving the best overall quality available. Otherwise it falls back to `best` and results in downloading the best available quality served as a single file. `best` is also needed for videos that don't come from YouTube because they don't provide the audio and video in two different files. If you want to only download some DASH formats (for example if you are not interested in getting videos with a resolution higher than 1080p), you can add `-f bestvideo[height<=?1080]+bestaudio/best` to your configuration file. Note that if you use youtube-dl to stream to `stdout` (and most likely to pipe it to your media player then), i.e. you explicitly specify output template as `-o -`, youtube-dl still uses `-f best` format selection in order to start content delivery immediately to your player and not to wait until `bestvideo` and `bestaudio` are downloaded and muxed.
+Since the end of April 2015 and version 2015.04.26, picta-dl uses `-f bestvideo+bestaudio/best` as the default format selection (see [#5447](https://github.com/ytdl-org/youtube-dl/issues/5447), [#5456](https://github.com/ytdl-org/youtube-dl/issues/5456)). If ffmpeg or avconv are installed this results in downloading `bestvideo` and `bestaudio` separately and muxing them together into a single file giving the best overall quality available. Otherwise it falls back to `best` and results in downloading the best available quality served as a single file. `best` is also needed for videos that don't come from YouTube because they don't provide the audio and video in two different files. If you want to only download some DASH formats (for example if you are not interested in getting videos with a resolution higher than 1080p), you can add `-f bestvideo[height<=?1080]+bestaudio/best` to your configuration file. Note that if you use picta-dl to stream to `stdout` (and most likely to pipe it to your media player then), i.e. you explicitly specify output template as `-o -`, picta-dl still uses `-f best` format selection in order to start content delivery immediately to your player and not to wait until `bestvideo` and `bestaudio` are downloaded and muxed.
 
-If you want to preserve the old format selection behavior (prior to youtube-dl 2015.04.26), i.e. you want to download the best available quality media served as a single file, you should explicitly specify your choice with `-f best`. You may want to add it to the [configuration file](#configuration) in order not to type it every time you run youtube-dl.
+If you want to preserve the old format selection behavior (prior to youtube-dl 2015.04.26), i.e. you want to download the best available quality media served as a single file, you should explicitly specify your choice with `-f best`. You may want to add it to the [configuration file](#configuration) in order not to type it every time you run picta-dl.
 
 #### Format selection examples
 
@@ -698,19 +698,19 @@ Note that on Windows you may need to use double quotes instead of single.
 
 ```bash
 # Download best mp4 format available or any other best if no mp4 available
-$ youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+$ picta-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
 
 # Download best format available but no better than 480p
-$ youtube-dl -f 'bestvideo[height<=480]+bestaudio/best[height<=480]'
+$ picta-dl -f 'bestvideo[height<=480]+bestaudio/best[height<=480]'
 
 # Download best video only format but no bigger than 50 MB
-$ youtube-dl -f 'best[filesize<50M]'
+$ picta-dl -f 'best[filesize<50M]'
 
 # Download best format available via direct link over HTTP/HTTPS protocol
-$ youtube-dl -f '(bestvideo+bestaudio/best)[protocol^=http]'
+$ picta-dl -f '(bestvideo+bestaudio/best)[protocol^=http]'
 
 # Download the best video format and the best audio format without merging them
-$ youtube-dl -f 'bestvideo,bestaudio' -o '%(title)s.f%(format_id)s.%(ext)s'
+$ picta-dl -f 'bestvideo,bestaudio' -o '%(title)s.f%(format_id)s.%(ext)s'
 ```
 Note that in the last example, an output template is recommended as bestvideo and bestaudio may have the same file name.
 
@@ -726,28 +726,28 @@ Examples:
 
 ```bash
 # Download only the videos uploaded in the last 6 months
-$ youtube-dl --dateafter now-6months
+$ picta-dl --dateafter now-6months
 
 # Download only the videos uploaded on January 1, 1970
-$ youtube-dl --date 19700101
+$ picta-dl --date 19700101
 
 $ # Download only the videos uploaded in the 200x decade
-$ youtube-dl --dateafter 20000101 --datebefore 20091231
+$ picta-dl --dateafter 20000101 --datebefore 20091231
 ```
 
 # FAQ
 
-### How do I update youtube-dl?
+### How do I update picta-dl?
 
-If you've followed [our manual installation instructions](https://ytdl-org.github.io/youtube-dl/download.html), you can simply run `youtube-dl -U` (or, on Linux, `sudo youtube-dl -U`).
+If you've followed [our manual installation instructions](https://ytdl-org.github.io/youtube-dl/download.html), you can simply run `picta-dl -U` (or, on Linux, `sudo picta-dl -U`).
 
-If you have used pip, a simple `sudo pip install -U youtube-dl` is sufficient to update.
+If you have used pip, a simple `sudo pip install -U picta-dl` is sufficient to update.
 
-If you have installed youtube-dl using a package manager like *apt-get* or *yum*, use the standard system update mechanism to update. Note that distribution packages are often outdated. As a rule of thumb, youtube-dl releases at least once a month, and often weekly or even daily. Simply go to https://yt-dl.org to find out the current version. Unfortunately, there is nothing we youtube-dl developers can do if your distribution serves a really outdated version. You can (and should) complain to your distribution in their bugtracker or support forum.
+If you have installed picta-dl using a package manager like *apt-get* or *yum*, use the standard system update mechanism to update. Note that distribution packages are often outdated. As a rule of thumb, picta-dl releases at least once a month, and often weekly or even daily. Simply go to https://yt-dl.org to find out the current version. Unfortunately, there is nothing we picta-dl developers can do if your distribution serves a really outdated version. You can (and should) complain to your distribution in their bugtracker or support forum.
 
 As a last resort, you can also uninstall the version installed by your package manager and follow our manual installation instructions. For that, remove the distribution's package, with a line like
 
-    sudo apt-get remove -y youtube-dl
+    sudo apt-get remove -y picta-dl
 
 Afterwards, simply follow [our manual installation instructions](https://ytdl-org.github.io/youtube-dl/download.html):
 
@@ -757,17 +757,17 @@ sudo chmod a+rx /usr/local/bin/youtube-dl
 hash -r
 ```
 
-Again, from then on you'll be able to update with `sudo youtube-dl -U`.
+Again, from then on you'll be able to update with `sudo picta-dl -U`.
 
-### youtube-dl is extremely slow to start on Windows
+### picta-dl is extremely slow to start on Windows
 
-Add a file exclusion for `youtube-dl.exe` in Windows Defender settings.
+Add a file exclusion for `picta-dl.exe` in Windows Defender settings.
 
 ### I'm getting an error `Unable to extract OpenGraph title` on YouTube playlists
 
-YouTube changed their playlist format in March 2014 and later on, so you'll need at least youtube-dl 2014.07.25 to download all YouTube videos.
+YouTube changed their playlist format in March 2014 and later on, so you'll need at least picta-dl 2014.07.25 to download all YouTube videos.
 
-If you have installed youtube-dl with a package manager, pip, setup.py or a tarball, please use that to update. Note that Ubuntu packages do not seem to get updated anymore. Since we are not affiliated with Ubuntu, there is little we can do. Feel free to [report bugs](https://bugs.launchpad.net/ubuntu/+source/youtube-dl/+filebug) to the [Ubuntu packaging people](mailto:ubuntu-motu@lists.ubuntu.com?subject=outdated%20version%20of%20youtube-dl) - all they have to do is update the package to a somewhat recent version. See above for a way to update.
+If you have installed picta-dl with a package manager, pip, setup.py or a tarball, please use that to update. Note that Ubuntu packages do not seem to get updated anymore. Since we are not affiliated with Ubuntu, there is little we can do. Feel free to [report bugs](https://bugs.launchpad.net/ubuntu/+source/youtube-dl/+filebug) to the [Ubuntu packaging people](mailto:ubuntu-motu@lists.ubuntu.com?subject=outdated%20version%20of%20youtube-dl) - all they have to do is update the package to a somewhat recent version. See above for a way to update.
 
 ### I'm getting an error when trying to use output template: `error: using output template conflicts with using title, video ID or auto number`
 
@@ -775,19 +775,19 @@ Make sure you are not using `-o` with any of these options `-t`, `--title`, `--i
 
 ### Do I always have to pass `-citw`?
 
-By default, youtube-dl intends to have the best options (incidentally, if you have a convincing case that these should be different, [please file an issue where you explain that](https://yt-dl.org/bug)). Therefore, it is unnecessary and sometimes harmful to copy long option strings from webpages. In particular, the only option out of `-citw` that is regularly useful is `-i`.
+By default, picta-dl intends to have the best options (incidentally, if you have a convincing case that these should be different, [please file an issue where you explain that](https://yt-dl.org/bug)). Therefore, it is unnecessary and sometimes harmful to copy long option strings from webpages. In particular, the only option out of `-citw` that is regularly useful is `-i`.
 
 ### Can you please put the `-b` option back?
 
-Most people asking this question are not aware that youtube-dl now defaults to downloading the highest available quality as reported by YouTube, which will be 1080p or 720p in some cases, so you no longer need the `-b` option. For some specific videos, maybe YouTube does not report them to be available in a specific high quality format you're interested in. In that case, simply request it with the `-f` option and youtube-dl will try to download it.
+Most people asking this question are not aware that picta-dl now defaults to downloading the highest available quality as reported by YouTube, which will be 1080p or 720p in some cases, so you no longer need the `-b` option. For some specific videos, maybe YouTube does not report them to be available in a specific high quality format you're interested in. In that case, simply request it with the `-f` option and picta-dl will try to download it.
 
 ### I get HTTP error 402 when trying to download a video. What's this?
 
-Apparently YouTube requires you to pass a CAPTCHA test if you download too much. We're [considering to provide a way to let you solve the CAPTCHA](https://github.com/ytdl-org/youtube-dl/issues/154), but at the moment, your best course of action is pointing a web browser to the youtube URL, solving the CAPTCHA, and restart youtube-dl.
+Apparently YouTube requires you to pass a CAPTCHA test if you download too much. We're [considering to provide a way to let you solve the CAPTCHA](https://github.com/ytdl-org/youtube-dl/issues/154), but at the moment, your best course of action is pointing a web browser to the youtube URL, solving the CAPTCHA, and restart picta-dl.
 
 ### Do I need any other programs?
 
-youtube-dl works fine on its own on most sites. However, if you want to convert video/audio, you'll need [avconv](https://libav.org/) or [ffmpeg](https://www.ffmpeg.org/). On some sites - most notably YouTube - videos can be retrieved in a higher quality format without sound. youtube-dl will detect whether avconv/ffmpeg is present and automatically pick the best option.
+picta-dl works fine on its own on most sites. However, if you want to convert video/audio, you'll need [avconv](https://libav.org/) or [ffmpeg](https://www.ffmpeg.org/). On some sites - most notably YouTube - videos can be retrieved in a higher quality format without sound. picta-dl will detect whether avconv/ffmpeg is present and automatically pick the best option.
 
 Videos or video formats streamed via RTMP protocol can only be downloaded when [rtmpdump](https://rtmpdump.mplayerhq.hu/) is installed. Downloading MMS and RTSP videos requires either [mplayer](https://mplayerhq.hu/) or [mpv](https://mpv.io/) to be installed.
 
@@ -797,45 +797,45 @@ Once the video is fully downloaded, use any video player, such as [mpv](https://
 
 ### I extracted a video URL with `-g`, but it does not play on another machine / in my web browser.
 
-It depends a lot on the service. In many cases, requests for the video (to download/play it) must come from the same IP address and with the same cookies and/or HTTP headers. Use the `--cookies` option to write the required cookies into a file, and advise your downloader to read cookies from that file. Some sites also require a common user agent to be used, use `--dump-user-agent` to see the one in use by youtube-dl. You can also get necessary cookies and HTTP headers from JSON output obtained with `--dump-json`.
+It depends a lot on the service. In many cases, requests for the video (to download/play it) must come from the same IP address and with the same cookies and/or HTTP headers. Use the `--cookies` option to write the required cookies into a file, and advise your downloader to read cookies from that file. Some sites also require a common user agent to be used, use `--dump-user-agent` to see the one in use by picta-dl. You can also get necessary cookies and HTTP headers from JSON output obtained with `--dump-json`.
 
 It may be beneficial to use IPv6; in some cases, the restrictions are only applied to IPv4. Some services (sometimes only for a subset of videos) do not restrict the video URL by IP address, cookie, or user-agent, but these are the exception rather than the rule.
 
 Please bear in mind that some URL protocols are **not** supported by browsers out of the box, including RTMP. If you are using `-g`, your own downloader must support these as well.
 
-If you want to play the video on a machine that is not running youtube-dl, you can relay the video content from the machine that runs youtube-dl. You can use `-o -` to let youtube-dl stream a video to stdout, or simply allow the player to download the files written by youtube-dl in turn.
+If you want to play the video on a machine that is not running picta-dl, you can relay the video content from the machine that runs picta-dl. You can use `-o -` to let picta-dl stream a video to stdout, or simply allow the player to download the files written by picta-dl in turn.
 
 ### ERROR: no fmt_url_map or conn information found in video info
 
-YouTube has switched to a new video info format in July 2011 which is not supported by old versions of youtube-dl. See [above](#how-do-i-update-youtube-dl) for how to update youtube-dl.
+YouTube has switched to a new video info format in July 2011 which is not supported by old versions of picta-dl. See [above](#how-do-i-update-youtube-dl) for how to update picta-dl.
 
 ### ERROR: unable to download video
 
-YouTube requires an additional signature since September 2012 which is not supported by old versions of youtube-dl. See [above](#how-do-i-update-youtube-dl) for how to update youtube-dl.
+YouTube requires an additional signature since September 2012 which is not supported by old versions of picta-dl. See [above](#how-do-i-update-youtube-dl) for how to update picta-dl.
 
 ### Video URL contains an ampersand and I'm getting some strange output `[1] 2839` or `'v' is not recognized as an internal or external command`
 
-That's actually the output from your shell. Since ampersand is one of the special shell characters it's interpreted by the shell preventing you from passing the whole URL to youtube-dl. To disable your shell from interpreting the ampersands (or any other special characters) you have to either put the whole URL in quotes or escape them with a backslash (which approach will work depends on your shell).
+That's actually the output from your shell. Since ampersand is one of the special shell characters it's interpreted by the shell preventing you from passing the whole URL to picta-dl. To disable your shell from interpreting the ampersands (or any other special characters) you have to either put the whole URL in quotes or escape them with a backslash (which approach will work depends on your shell).
 
 For example if your URL is https://www.youtube.com/watch?t=4&v=BaW_jenozKc you should end up with following command:
 
-```youtube-dl 'https://www.youtube.com/watch?t=4&v=BaW_jenozKc'```
+```picta-dl 'https://www.youtube.com/watch?t=4&v=BaW_jenozKc'```
 
 or
 
-```youtube-dl https://www.youtube.com/watch?t=4\&v=BaW_jenozKc```
+```picta-dl https://www.youtube.com/watch?t=4\&v=BaW_jenozKc```
 
 For Windows you have to use the double quotes:
 
-```youtube-dl "https://www.youtube.com/watch?t=4&v=BaW_jenozKc"```
+```picta-dl "https://www.youtube.com/watch?t=4&v=BaW_jenozKc"```
 
 ### ExtractorError: Could not find JS function u'OF'
 
-In February 2015, the new YouTube player contained a character sequence in a string that was misinterpreted by old versions of youtube-dl. See [above](#how-do-i-update-youtube-dl) for how to update youtube-dl.
+In February 2015, the new YouTube player contained a character sequence in a string that was misinterpreted by old versions of picta-dl. See [above](#how-do-i-update-youtube-dl) for how to update picta-dl.
 
 ### HTTP Error 429: Too Many Requests or 402: Payment Required
 
-These two error codes indicate that the service is blocking your IP address because of overuse. Usually this is a soft block meaning that you can gain access again after solving CAPTCHA. Just open a browser and solve a CAPTCHA the service suggests you and after that [pass cookies](#how-do-i-pass-cookies-to-youtube-dl) to youtube-dl. Note that if your machine has multiple external IPs then you should also pass exactly the same IP you've used for solving CAPTCHA with [`--source-address`](#network-options). Also you may need to pass a `User-Agent` HTTP header of your browser with [`--user-agent`](#workarounds).
+These two error codes indicate that the service is blocking your IP address because of overuse. Usually this is a soft block meaning that you can gain access again after solving CAPTCHA. Just open a browser and solve a CAPTCHA the service suggests you and after that [pass cookies](#how-do-i-pass-cookies-to-youtube-dl) to picta-dl. Note that if your machine has multiple external IPs then you should also pass exactly the same IP you've used for solving CAPTCHA with [`--source-address`](#network-options). Also you may need to pass a `User-Agent` HTTP header of your browser with [`--user-agent`](#workarounds).
 
 If this is not the case (no CAPTCHA suggested to solve by the service) then you can contact the service and ask them to unblock your IP address, or - if you have acquired a whitelisted IP address already - use the [`--proxy` or `--source-address` options](#network-options) to select another IP address.
 
@@ -843,26 +843,26 @@ If this is not the case (no CAPTCHA suggested to solve by the service) then you 
 
 The error
 
-    File "youtube-dl", line 2
+    File "picta-dl", line 2
     SyntaxError: Non-ASCII character '\x93' ...
 
 means you're using an outdated version of Python. Please update to Python 2.6 or 2.7.
 
 ### What is this binary file? Where has the code gone?
 
-Since June 2012 ([#342](https://github.com/ytdl-org/youtube-dl/issues/342)) youtube-dl is packed as an executable zipfile, simply unzip it (might need renaming to `youtube-dl.zip` first on some systems) or clone the git repository, as laid out above. If you modify the code, you can run it by executing the `__main__.py` file. To recompile the executable, run `make youtube-dl`.
+Since June 2012 ([#342](https://github.com/ytdl-org/youtube-dl/issues/342)) picta-dl is packed as an executable zipfile, simply unzip it (might need renaming to `picta-dl.zip` first on some systems) or clone the git repository, as laid out above. If you modify the code, you can run it by executing the `__main__.py` file. To recompile the executable, run `make picta-dl`.
 
 ### The exe throws an error due to missing `MSVCR100.dll`
 
 To run the exe you need to install first the [Microsoft Visual C++ 2010 Redistributable Package (x86)](https://www.microsoft.com/en-US/download/details.aspx?id=5555).
 
-### On Windows, how should I set up ffmpeg and youtube-dl? Where should I put the exe files?
+### On Windows, how should I set up ffmpeg and picta-dl? Where should I put the exe files?
 
-If you put youtube-dl and ffmpeg in the same directory that you're running the command from, it will work, but that's rather cumbersome.
+If you put picta-dl and ffmpeg in the same directory that you're running the command from, it will work, but that's rather cumbersome.
 
-To make a different directory work - either for ffmpeg, or for youtube-dl, or for both - simply create the directory (say, `C:\bin`, or `C:\Users\<User name>\bin`), put all the executables directly in there, and then [set your PATH environment variable](https://www.java.com/en/download/help/path.xml) to include that directory.
+To make a different directory work - either for ffmpeg, or for picta-dl, or for both - simply create the directory (say, `C:\bin`, or `C:\Users\<User name>\bin`), put all the executables directly in there, and then [set your PATH environment variable](https://www.java.com/en/download/help/path.xml) to include that directory.
 
-From then on, after restarting your shell, you will be able to access both youtube-dl and ffmpeg (and youtube-dl will be able to find ffmpeg) by simply typing `youtube-dl` or `ffmpeg`, no matter what directory you're in.
+From then on, after restarting your shell, you will be able to access both picta-dl and ffmpeg (and picta-dl will be able to find ffmpeg) by simply typing `picta-dl` or `ffmpeg`, no matter what directory you're in.
 
 ### How do I put downloads into a specific folder?
 
@@ -872,10 +872,10 @@ Use the `-o` to specify an [output template](#output-template), for example `-o 
 
 Either prepend `https://www.youtube.com/watch?v=` or separate the ID from the options with `--`:
 
-    youtube-dl -- -wNyEUrxzFU
-    youtube-dl "https://www.youtube.com/watch?v=-wNyEUrxzFU"
+    picta-dl -- -wNyEUrxzFU
+    picta-dl "https://www.youtube.com/watch?v=-wNyEUrxzFU"
 
-### How do I pass cookies to youtube-dl?
+### How do I pass cookies to picta-dl?
 
 Use the `--cookies` option, for example `--cookies /path/to/cookies/file.txt`.
 
@@ -883,13 +883,13 @@ In order to extract cookies from browser use any conforming browser extension fo
 
 Note that the cookies file must be in Mozilla/Netscape format and the first line of the cookies file must be either `# HTTP Cookie File` or `# Netscape HTTP Cookie File`. Make sure you have correct [newline format](https://en.wikipedia.org/wiki/Newline) in the cookies file and convert newlines if necessary to correspond with your OS, namely `CRLF` (`\r\n`) for Windows and `LF` (`\n`) for Unix and Unix-like systems (Linux, macOS, etc.). `HTTP Error 400: Bad Request` when using `--cookies` is a good sign of invalid newline format.
 
-Passing cookies to youtube-dl is a good way to workaround login when a particular extractor does not implement it explicitly. Another use case is working around [CAPTCHA](https://en.wikipedia.org/wiki/CAPTCHA) some websites require you to solve in particular cases in order to get access (e.g. YouTube, CloudFlare).
+Passing cookies to picta-dl is a good way to workaround login when a particular extractor does not implement it explicitly. Another use case is working around [CAPTCHA](https://en.wikipedia.org/wiki/CAPTCHA) some websites require you to solve in particular cases in order to get access (e.g. YouTube, CloudFlare).
 
 ### How do I stream directly to media player?
 
-You will first need to tell youtube-dl to stream media to stdout with `-o -`, and also tell your media player to read from stdin (it must be capable of this for streaming) and then pipe former to latter. For example, streaming to [vlc](https://www.videolan.org/) can be achieved with:
+You will first need to tell picta-dl to stream media to stdout with `-o -`, and also tell your media player to read from stdin (it must be capable of this for streaming) and then pipe former to latter. For example, streaming to [vlc](https://www.videolan.org/) can be achieved with:
 
-    youtube-dl -o - "https://www.youtube.com/watch?v=BaW_jenozKcj" | vlc -
+    picta-dl -o - "https://www.youtube.com/watch?v=BaW_jenozKcj" | vlc -
 
 ### How do I download only new videos from a playlist?
 
@@ -897,17 +897,17 @@ Use download-archive feature. With this feature you should initially download th
 
 For example, at first,
 
-    youtube-dl --download-archive archive.txt "https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re"
+    picta-dl --download-archive archive.txt "https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re"
 
 will download the complete `PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re` playlist and create a file `archive.txt`. Each subsequent run will only download new videos if any:
 
-    youtube-dl --download-archive archive.txt "https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re"
+    picta-dl --download-archive archive.txt "https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re"
 
 ### Should I add `--hls-prefer-native` into my config?
 
-When youtube-dl detects an HLS video, it can download it either with the built-in downloader or ffmpeg. Since many HLS streams are slightly invalid and ffmpeg/youtube-dl each handle some invalid cases better than the other, there is an option to switch the downloader if needed.
+When picta-dl detects an HLS video, it can download it either with the built-in downloader or ffmpeg. Since many HLS streams are slightly invalid and ffmpeg/picta-dl each handle some invalid cases better than the other, there is an option to switch the downloader if needed.
 
-When youtube-dl knows that one particular downloader works better for a given website, that downloader will be picked. Otherwise, youtube-dl will pick the best downloader for general compatibility, which at the moment happens to be ffmpeg. This choice may change in future versions of youtube-dl, with improvements of the built-in downloader and/or ffmpeg.
+When picta-dl knows that one particular downloader works better for a given website, that downloader will be picked. Otherwise, picta-dl will pick the best downloader for general compatibility, which at the moment happens to be ffmpeg. This choice may change in future versions of picta-dl, with improvements of the built-in downloader and/or ffmpeg.
 
 In particular, the generic extractor (used when your website is not in the [list of supported sites by youtube-dl](https://ytdl-org.github.io/youtube-dl/supportedsites.html) cannot mandate one specific downloader.
 
@@ -915,45 +915,45 @@ If you put either `--hls-prefer-native` or `--hls-prefer-ffmpeg` into your confi
 
 ### Can you add support for this anime video site, or site which shows current movies for free?
 
-As a matter of policy (as well as legality), youtube-dl does not include support for services that specialize in infringing copyright. As a rule of thumb, if you cannot easily find a video that the service is quite obviously allowed to distribute (i.e. that has been uploaded by the creator, the creator's distributor, or is published under a free license), the service is probably unfit for inclusion to youtube-dl.
+As a matter of policy (as well as legality), picta-dl does not include support for services that specialize in infringing copyright. As a rule of thumb, if you cannot easily find a video that the service is quite obviously allowed to distribute (i.e. that has been uploaded by the creator, the creator's distributor, or is published under a free license), the service is probably unfit for inclusion to picta-dl.
 
-A note on the service that they don't host the infringing content, but just link to those who do, is evidence that the service should **not** be included into youtube-dl. The same goes for any DMCA note when the whole front page of the service is filled with videos they are not allowed to distribute. A "fair use" note is equally unconvincing if the service shows copyright-protected videos in full without authorization.
+A note on the service that they don't host the infringing content, but just link to those who do, is evidence that the service should **not** be included into picta-dl. The same goes for any DMCA note when the whole front page of the service is filled with videos they are not allowed to distribute. A "fair use" note is equally unconvincing if the service shows copyright-protected videos in full without authorization.
 
 Support requests for services that **do** purchase the rights to distribute their content are perfectly fine though. If in doubt, you can simply include a source that mentions the legitimate purchase of content.
 
 ### How can I speed up work on my issue?
 
-(Also known as: Help, my important issue not being solved!) The youtube-dl core developer team is quite small. While we do our best to solve as many issues as possible, sometimes that can take quite a while. To speed up your issue, here's what you can do:
+(Also known as: Help, my important issue not being solved!) The picta-dl core developer team is quite small. While we do our best to solve as many issues as possible, sometimes that can take quite a while. To speed up your issue, here's what you can do:
 
-First of all, please do report the issue [at our issue tracker](https://yt-dl.org/bugs). That allows us to coordinate all efforts by users and developers, and serves as a unified point. Unfortunately, the youtube-dl project has grown too large to use personal email as an effective communication channel.
+First of all, please do report the issue [at our issue tracker](https://yt-dl.org/bugs). That allows us to coordinate all efforts by users and developers, and serves as a unified point. Unfortunately, the picta-dl project has grown too large to use personal email as an effective communication channel.
 
-Please read the [bug reporting instructions](#bugs) below. A lot of bugs lack all the necessary information. If you can, offer proxy, VPN, or shell access to the youtube-dl developers. If you are able to, test the issue from multiple computers in multiple countries to exclude local censorship or misconfiguration issues.
+Please read the [bug reporting instructions](#bugs) below. A lot of bugs lack all the necessary information. If you can, offer proxy, VPN, or shell access to the picta-dl developers. If you are able to, test the issue from multiple computers in multiple countries to exclude local censorship or misconfiguration issues.
 
 If nobody is interested in solving your issue, you are welcome to take matters into your own hands and submit a pull request (or coerce/pay somebody else to do so).
 
-Feel free to bump the issue from time to time by writing a small comment ("Issue is still present in youtube-dl version ...from France, but fixed from Belgium"), but please not more than once a month. Please do not declare your issue as `important` or `urgent`.
+Feel free to bump the issue from time to time by writing a small comment ("Issue is still present in picta-dl version ...from France, but fixed from Belgium"), but please not more than once a month. Please do not declare your issue as `important` or `urgent`.
 
-### How can I detect whether a given URL is supported by youtube-dl?
+### How can I detect whether a given URL is supported by picta-dl?
 
-For one, have a look at the [list of supported sites](docs/supportedsites.md). Note that it can sometimes happen that the site changes its URL scheme (say, from https://example.com/video/1234567 to https://example.com/v/1234567 ) and youtube-dl reports an URL of a service in that list as unsupported. In that case, simply report a bug.
+For one, have a look at the [list of supported sites](docs/supportedsites.md). Note that it can sometimes happen that the site changes its URL scheme (say, from https://example.com/video/1234567 to https://example.com/v/1234567 ) and picta-dl reports an URL of a service in that list as unsupported. In that case, simply report a bug.
 
-It is *not* possible to detect whether a URL is supported or not. That's because youtube-dl contains a generic extractor which matches **all** URLs. You may be tempted to disable, exclude, or remove the generic extractor, but the generic extractor not only allows users to extract videos from lots of websites that embed a video from another service, but may also be used to extract video from a service that it's hosting itself. Therefore, we neither recommend nor support disabling, excluding, or removing the generic extractor.
+It is *not* possible to detect whether a URL is supported or not. That's because picta-dl contains a generic extractor which matches **all** URLs. You may be tempted to disable, exclude, or remove the generic extractor, but the generic extractor not only allows users to extract videos from lots of websites that embed a video from another service, but may also be used to extract video from a service that it's hosting itself. Therefore, we neither recommend nor support disabling, excluding, or removing the generic extractor.
 
-If you want to find out whether a given URL is supported, simply call youtube-dl with it. If you get no videos back, chances are the URL is either not referring to a video or unsupported. You can find out which by examining the output (if you run youtube-dl on the console) or catching an `UnsupportedError` exception if you run it from a Python program.
+If you want to find out whether a given URL is supported, simply call picta-dl with it. If you get no videos back, chances are the URL is either not referring to a video or unsupported. You can find out which by examining the output (if you run picta-dl on the console) or catching an `UnsupportedError` exception if you run it from a Python program.
 
 # Why do I need to go through that much red tape when filing bugs?
 
-Before we had the issue template, despite our extensive [bug reporting instructions](#bugs), about 80% of the issue reports we got were useless, for instance because people used ancient versions hundreds of releases old, because of simple syntactic errors (not in youtube-dl but in general shell usage), because the problem was already reported multiple times before, because people did not actually read an error message, even if it said "please install ffmpeg", because people did not mention the URL they were trying to download and many more simple, easy-to-avoid problems, many of whom were totally unrelated to youtube-dl.
+Before we had the issue template, despite our extensive [bug reporting instructions](#bugs), about 80% of the issue reports we got were useless, for instance because people used ancient versions hundreds of releases old, because of simple syntactic errors (not in picta-dl but in general shell usage), because the problem was already reported multiple times before, because people did not actually read an error message, even if it said "please install ffmpeg", because people did not mention the URL they were trying to download and many more simple, easy-to-avoid problems, many of whom were totally unrelated to picta-dl.
 
-youtube-dl is an open-source project manned by too few volunteers, so we'd rather spend time fixing bugs where we are certain none of those simple problems apply, and where we can be reasonably confident to be able to reproduce the issue without asking the reporter repeatedly. As such, the output of `youtube-dl -v YOUR_URL_HERE` is really all that's required to file an issue. The issue template also guides you through some basic steps you can do, such as checking that your version of youtube-dl is current.
+picta-dl is an open-source project manned by too few volunteers, so we'd rather spend time fixing bugs where we are certain none of those simple problems apply, and where we can be reasonably confident to be able to reproduce the issue without asking the reporter repeatedly. As such, the output of `picta-dl -v YOUR_URL_HERE` is really all that's required to file an issue. The issue template also guides you through some basic steps you can do, such as checking that your version of picta-dl is current.
 
 # DEVELOPER INSTRUCTIONS
 
-Most users do not need to build youtube-dl and can [download the builds](https://ytdl-org.github.io/youtube-dl/download.html) or get them from their distribution.
+Most users do not need to build picta-dl and can [download the builds](https://ytdl-org.github.io/youtube-dl/download.html) or get them from their distribution.
 
-To run youtube-dl as a developer, you don't need to build anything either. Simply execute
+To run picta-dl as a developer, you don't need to build anything either. Simply execute
 
-    python -m youtube_dl
+    python -m picta_dl
 
 To run the test, simply invoke your favorite test runner, or execute a test file directly; any of the following work:
 
@@ -963,7 +963,7 @@ To run the test, simply invoke your favorite test runner, or execute a test file
 
 See item 6 of [new extractor tutorial](#adding-support-for-a-new-site) for how to run extractor specific test cases.
 
-If you want to create a build of youtube-dl yourself, you'll need
+If you want to create a build of picta-dl yourself, you'll need
 
 * python
 * make (only GNU make is supported)
@@ -973,7 +973,7 @@ If you want to create a build of youtube-dl yourself, you'll need
 
 ### Adding support for a new site
 
-If you want to add support for a new site, first of all **make sure** this site is **not dedicated to [copyright infringement](README.md#can-you-add-support-for-this-anime-video-site-or-site-which-shows-current-movies-for-free)**. youtube-dl does **not support** such sites thus pull requests adding support for them **will be rejected**.
+If you want to add support for a new site, first of all **make sure** this site is **not dedicated to [copyright infringement](README.md#can-you-add-support-for-this-anime-video-site-or-site-which-shows-current-movies-for-free)**. picta-dl does **not support** such sites thus pull requests adding support for them **will be rejected**.
 
 After you have ensured this site is distributing its content legally, you can follow this quick list (assuming your service is called `yourextractor`):
 
@@ -1048,21 +1048,21 @@ After you have ensured this site is distributing its content legally, you can fo
 
 In any case, thank you very much for your contributions!
 
-## youtube-dl coding conventions
+## picta-dl coding conventions
 
 This section introduces a guide lines for writing idiomatic, robust and future-proof extractor code.
 
-Extractors are very fragile by nature since they depend on the layout of the source data provided by 3rd party media hosters out of your control and this layout tends to change. As an extractor implementer your task is not only to write code that will extract media links and metadata correctly but also to minimize dependency on the source's layout and even to make the code foresee potential future changes and be ready for that. This is important because it will allow the extractor not to break on minor layout changes thus keeping old youtube-dl versions working. Even though this breakage issue is easily fixed by emitting a new version of youtube-dl with a fix incorporated, all the previous versions become broken in all repositories and distros' packages that may not be so prompt in fetching the update from us. Needless to say, some non rolling release distros may never receive an update at all.
+Extractors are very fragile by nature since they depend on the layout of the source data provided by 3rd party media hosters out of your control and this layout tends to change. As an extractor implementer your task is not only to write code that will extract media links and metadata correctly but also to minimize dependency on the source's layout and even to make the code foresee potential future changes and be ready for that. This is important because it will allow the extractor not to break on minor layout changes thus keeping old picta-dl versions working. Even though this breakage issue is easily fixed by emitting a new version of picta-dl with a fix incorporated, all the previous versions become broken in all repositories and distros' packages that may not be so prompt in fetching the update from us. Needless to say, some non rolling release distros may never receive an update at all.
 
 ### Mandatory and optional metafields
 
-For extraction to work youtube-dl relies on metadata your extractor extracts and provides to youtube-dl expressed by an [information dictionary](https://github.com/ytdl-org/youtube-dl/blob/7f41a598b3fba1bcab2817de64a08941200aa3c8/youtube_dl/extractor/common.py#L94-L303) or simply *info dict*. Only the following meta fields in the *info dict* are considered mandatory for a successful extraction process by youtube-dl:
+For extraction to work picta-dl relies on metadata your extractor extracts and provides to picta-dl expressed by an [information dictionary](https://github.com/ytdl-org/youtube-dl/blob/7f41a598b3fba1bcab2817de64a08941200aa3c8/youtube_dl/extractor/common.py#L94-L303) or simply *info dict*. Only the following meta fields in the *info dict* are considered mandatory for a successful extraction process by picta-dl:
 
  - `id` (media identifier)
  - `title` (media title)
  - `url` (media download URL) or `formats`
 
-In fact only the last option is technically mandatory (i.e. if you can't figure out the download location of the media the extraction does not make any sense). But by convention youtube-dl also treats `id` and `title` as mandatory. Thus the aforementioned metafields are the critical data that the extraction does not make any sense without and if any of them fail to be extracted then the extractor is considered completely broken.
+In fact only the last option is technically mandatory (i.e. if you can't figure out the download location of the media the extraction does not make any sense). But by convention picta-dl also treats `id` and `title` as mandatory. Thus the aforementioned metafields are the critical data that the extraction does not make any sense without and if any of them fail to be extracted then the extractor is considered completely broken.
 
 [Any field](https://github.com/ytdl-org/youtube-dl/blob/7f41a598b3fba1bcab2817de64a08941200aa3c8/youtube_dl/extractor/common.py#L188-L303) apart from the aforementioned ones are considered **optional**. That means that extraction should be **tolerant** to situations when sources for these fields can potentially be unavailable (even if they are always available at the moment) and **future-proof** in order not to break the extraction of general purpose mandatory fields.
 
@@ -1286,7 +1286,7 @@ Incorrect:
 
 ### Use convenience conversion and parsing functions
 
-Wrap all extracted numeric data into safe functions from [`youtube_dl/utils.py`](https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/utils.py): `int_or_none`, `float_or_none`. Use them for string to number conversions as well.
+Wrap all extracted numeric data into safe functions from [`picta_dl/utils.py`](https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/utils.py): `int_or_none`, `float_or_none`. Use them for string to number conversions as well.
 
 Use `url_or_none` for safe URL processing.
 
@@ -1294,7 +1294,7 @@ Use `try_get` for safe metadata extraction from parsed JSON.
 
 Use `unified_strdate` for uniform `upload_date` or any `YYYYMMDD` meta field extraction, `unified_timestamp` for uniform `timestamp` extraction, `parse_filesize` for `filesize` extraction, `parse_count` for count meta fields extraction, `parse_resolution`, `parse_duration` for `duration` extraction, `parse_age_limit` for `age_limit` extraction. 
 
-Explore [`youtube_dl/utils.py`](https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/utils.py) for more useful convenience functions.
+Explore [`picta_dl/utils.py`](https://github.com/ytdl-org/youtube-dl/blob/master/youtube_dl/utils.py) for more useful convenience functions.
 
 #### More examples
 
@@ -1311,11 +1311,11 @@ duration = float_or_none(video.get('durationMs'), scale=1000)
 view_count = int_or_none(video.get('views'))
 ```
 
-# EMBEDDING YOUTUBE-DL
+# EMBEDDING PICTA-DL
 
-youtube-dl makes the best effort to be a good command-line program, and thus should be callable from any programming language. If you encounter any problems parsing its output, feel free to [create a report](https://github.com/ytdl-org/youtube-dl/issues/new).
+picta-dl makes the best effort to be a good command-line program, and thus should be callable from any programming language. If you encounter any problems parsing its output, feel free to [create a report](https://github.com/ytdl-org/youtube-dl/issues/new).
 
-From a Python program, you can embed youtube-dl in a more powerful fashion, like this:
+From a Python program, you can embed picta-dl in a more powerful fashion, like this:
 
 ```python
 from __future__ import unicode_literals
@@ -1326,7 +1326,7 @@ with picta_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download(['https://www.youtube.com/watch?v=BaW_jenozKc'])
 ```
 
-Most likely, you'll want to use various options. For a list of options available, have a look at [`youtube_dl/YoutubeDL.py`](https://github.com/ytdl-org/youtube-dl/blob/3e4cedf9e8cd3157df2457df7274d0c842421945/youtube_dl/YoutubeDL.py#L137-L312). For a start, if you want to intercept youtube-dl's output, set a `logger` object.
+Most likely, you'll want to use various options. For a list of options available, have a look at [`picta_dl/YoutubeDL.py`](https://github.com/ytdl-org/youtube-dl/blob/3e4cedf9e8cd3157df2457df7274d0c842421945/youtube_dl/YoutubeDL.py#L137-L312). For a start, if you want to intercept picta-dl's output, set a `logger` object.
 
 Here's a more complete example of a program that outputs only errors (and a short message after the download is finished), and downloads/converts the video to an mp3 file:
 
@@ -1369,14 +1369,14 @@ with picta_dl.YoutubeDL(ydl_opts) as ydl:
 
 Bugs and suggestions should be reported at: <https://github.com/ytdl-org/youtube-dl/issues>. Unless you were prompted to or there is another pertinent reason (e.g. GitHub fails to accept the bug report), please do not send bug reports via personal email. For discussions, join us in the IRC channel [#youtube-dl](irc://chat.freenode.net/#youtube-dl) on freenode ([webchat](https://webchat.freenode.net/?randomnick=1&channels=youtube-dl)).
 
-**Please include the full output of youtube-dl when run with `-v`**, i.e. **add** `-v` flag to **your command line**, copy the **whole** output and post it in the issue body wrapped in \`\`\` for better formatting. It should look similar to this:
+**Please include the full output of picta-dl when run with `-v`**, i.e. **add** `-v` flag to **your command line**, copy the **whole** output and post it in the issue body wrapped in \`\`\` for better formatting. It should look similar to this:
 ```
-$ youtube-dl -v <your command line>
+$ picta-dl -v <your command line>
 [debug] System config: []
 [debug] User config: []
 [debug] Command-line args: [u'-v', u'https://www.youtube.com/watch?v=BaW_jenozKcj']
 [debug] Encodings: locale cp1251, fs mbcs, out cp866, pref cp1251
-[debug] youtube-dl version 2015.12.06
+[debug] picta-dl version 2015.12.06
 [debug] Git HEAD: 135392e
 [debug] Python version 2.6.6 - Windows-2003Server-5.2.3790-SP2
 [debug] exe versions: ffmpeg N-75573-g1d0487f, ffprobe N-75573-g1d0487f, rtmpdump 2.4
@@ -1401,7 +1401,7 @@ So please elaborate on what feature you are requesting, or what bug you want to 
 
 If your report is shorter than two lines, it is almost certainly missing some of these, which makes it hard for us to respond to it. We're often too polite to close the issue outright, but the missing info makes misinterpretation likely. As a committer myself, I often get frustrated by these issues, since the only possible way for me to move forward on them is to ask for clarification over and over.
 
-For bug reports, this means that your report should contain the *complete* output of youtube-dl when called with the `-v` flag. The error message you get for (most) bugs even says so, but you would not believe how many of our bug reports do not contain this information.
+For bug reports, this means that your report should contain the *complete* output of picta-dl when called with the `-v` flag. The error message you get for (most) bugs even says so, but you would not believe how many of our bug reports do not contain this information.
 
 If your server has multiple IPs or you suspect censorship, adding `--call-home` may be a good idea to get more diagnostics. If the error is `ERROR: Unable to extract ...` and you cannot reproduce it from multiple countries, add `--dump-pages` (warning: this will yield a rather large output, redirect it to the file `log.txt` by adding `>log.txt 2>&1` to your command-line) or upload the `.dump` files you get when you add `--write-pages` [somewhere](https://gist.github.com/).
 
@@ -1409,7 +1409,7 @@ If your server has multiple IPs or you suspect censorship, adding `--call-home` 
 
 ###  Are you using the latest version?
 
-Before reporting any issue, type `youtube-dl -U`. This should report that you're up-to-date. About 20% of the reports we receive are already fixed, but people are using outdated versions. This goes for feature requests as well.
+Before reporting any issue, type `picta-dl -U`. This should report that you're up-to-date. About 20% of the reports we receive are already fixed, but people are using outdated versions. This goes for feature requests as well.
 
 ###  Is the issue already documented?
 
@@ -1429,18 +1429,18 @@ We are then presented with a very complicated request when the original problem 
 
 Some of our users seem to think there is a limit of issues they can or should open. There is no limit of issues they can or should open. While it may seem appealing to be able to dump all your issues into one ticket, that means that someone who solves one of your issues cannot mark the issue as closed. Typically, reporting a bunch of issues leads to the ticket lingering since nobody wants to attack that behemoth, until someone mercifully splits the issue into multiple ones.
 
-In particular, every site support request issue should only pertain to services at one site (generally under a common domain, but always using the same backend technology). Do not request support for vimeo user videos, White house podcasts, and Google Plus pages in the same issue. Also, make sure that you don't post bug reports alongside feature requests. As a rule of thumb, a feature request does not include outputs of youtube-dl that are not immediately related to the feature at hand. Do not post reports of a network error alongside the request for a new video service.
+In particular, every site support request issue should only pertain to services at one site (generally under a common domain, but always using the same backend technology). Do not request support for vimeo user videos, White house podcasts, and Google Plus pages in the same issue. Also, make sure that you don't post bug reports alongside feature requests. As a rule of thumb, a feature request does not include outputs of picta-dl that are not immediately related to the feature at hand. Do not post reports of a network error alongside the request for a new video service.
 
 ###  Is anyone going to need the feature?
 
 Only post features that you (or an incapacitated friend you can personally talk to) require. Do not post features because they seem like a good idea. If they are really useful, they will be requested by someone who requires them.
 
-###  Is your question about youtube-dl?
+###  Is your question about picta-dl?
 
-It may sound strange, but some bug reports we receive are completely unrelated to youtube-dl and relate to a different, or even the reporter's own, application. Please make sure that you are actually using youtube-dl. If you are using a UI for youtube-dl, report the bug to the maintainer of the actual application providing the UI. On the other hand, if your UI for youtube-dl fails in some way you believe is related to youtube-dl, by all means, go ahead and report the bug.
+It may sound strange, but some bug reports we receive are completely unrelated to picta-dl and relate to a different, or even the reporter's own, application. Please make sure that you are actually using picta-dl. If you are using a UI for picta-dl, report the bug to the maintainer of the actual application providing the UI. On the other hand, if your UI for picta-dl fails in some way you believe is related to picta-dl, by all means, go ahead and report the bug.
 
 # COPYRIGHT
 
-youtube-dl is released into the public domain by the copyright holders.
+picta-dl is released into the public domain by the copyright holders.
 
 This README file was originally written by [Daniel Bolton](https://github.com/dbbolton) and is likewise released into the public domain.
