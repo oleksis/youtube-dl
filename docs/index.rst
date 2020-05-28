@@ -1,13 +1,13 @@
-Welcome to youtube-dl's documentation!
+Welcome to picta-dl's documentation!
 ======================================
 
-*youtube-dl* is a command-line program to download videos from YouTube.com and more sites.
+*picta-dl* is a command-line program to download videos from YouTube.com and Picta.cu Plataforma de Contenidos Audiovisuales.
 It can also be used in Python code.
 
 Developer guide
 ---------------
 
-This section contains information for using *youtube-dl* from Python programs.
+This section contains information for using *picta-dl* from Python programs.
 
 .. toctree::
     :maxdepth: 2

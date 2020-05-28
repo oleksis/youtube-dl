@@ -1,11 +1,11 @@
-Using the ``youtube_dl`` module
+Using the ``picta_dl`` module
 ===============================
 
-When using the ``youtube_dl`` module, you start by creating an instance of :class:`YoutubeDL` and adding all the available extractors:
+When using the ``picta_dl`` module, you start by creating an instance of :class:`YoutubeDL` and adding all the available extractors:
 
 .. code-block:: python
 
-    >>> from youtube_dl import YoutubeDL
+    >>> from picta_dl import YoutubeDL
     >>> ydl = YoutubeDL()
     >>> ydl.add_default_info_extractors()
 
