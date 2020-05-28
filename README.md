@@ -1311,7 +1311,7 @@ duration = float_or_none(video.get('durationMs'), scale=1000)
 view_count = int_or_none(video.get('views'))
 ```
 
-# EMBEDDING PICTA-DL
+# EMBEDDING YOUTUBE-DL
 
 picta-dl makes the best effort to be a good command-line program, and thus should be callable from any programming language. If you encounter any problems parsing its output, feel free to [create a report](https://github.com/ytdl-org/youtube-dl/issues/new).
 
