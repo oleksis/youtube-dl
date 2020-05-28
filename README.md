@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.org/ytdl-org/youtube-dl)
 
-picta-dl - download videos from youtube.com and picta.cu Plataforma de Contenidos Audiovisuales
+picta-dl - download videos from picta.cu Plataforma de Contenidos Audiovisuales and youtube.com
 
 - [INSTALLATION](#installation)
 - [DESCRIPTION](#description)

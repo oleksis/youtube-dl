@@ -1,7 +1,7 @@
 Welcome to picta-dl's documentation!
 ======================================
 
-*picta-dl* is a command-line program to download videos from YouTube.com and Picta.cu Plataforma de Contenidos Audiovisuales.
+*picta-dl* is a command-line program to download videos from Picta.cu Plataforma de Contenidos Audiovisuales and YouTube.com.
 It can also be used in Python code.
 
 Developer guide
