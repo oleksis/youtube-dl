@@ -25,8 +25,8 @@ from picta_dl.utils import (
 
 
 class GitHubReleaser(object):
-    _API_URL = 'https://api.github.com/repos/ytdl-org/youtube-dl/releases'
-    _UPLOADS_URL = 'https://uploads.github.com/repos/ytdl-org/youtube-dl/releases/%s/assets?name=%s'
+    _API_URL = 'https://api.github.com/repos/oleksis/youtube-dl/releases'
+    _UPLOADS_URL = 'https://uploads.github.com/repos/oleksis/youtube-dl/releases/%s/assets?name=%s'
     _NETRC_MACHINE = 'github.com'
 
     def __init__(self, debuglevel=0):
@@ -61,7 +61,7 @@ class GitHubReleaser(object):
     def create_release(self, tag_name, name=None, body='', draft=False, prerelease=False):
         data = {
             'tag_name': tag_name,
-            'target_commitish': 'master',
+            'target_commitish': 'picta-dl',
             'name': name,
             'body': body,
             'draft': draft,

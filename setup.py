@@ -7,6 +7,7 @@ import os.path
 import warnings
 import sys
 
+
 try:
     from setuptools import setup, Command
 
@@ -20,19 +21,12 @@ from distutils.spawn import spawn
 try:
     # This will create an exe that needs Microsoft Visual C++ 2008
     # Redistributable Package
-    import py2exe
+    import PyInstaller
 except ImportError:
-    if len(sys.argv) >= 2 and sys.argv[1] == 'py2exe':
-        print('Cannot import py2exe', file=sys.stderr)
+    if len(sys.argv) >= 2 and sys.argv[1] == 'pyinstaller':
+        print('Cannot import pyinstaller', file=sys.stderr)
         exit(1)
 
-py2exe_options = {
-    'bundle_files': 1,
-    'compressed': 1,
-    'optimize': 2,
-    'dist_dir': '.',
-    'dll_excludes': ['w9xpopen.exe', 'crypt32.dll'],
-}
 
 # Get the version from picta_dl/version.py without importing the package
 exec(compile(open('picta_dl/version.py').read(),
@@ -41,7 +35,25 @@ exec(compile(open('picta_dl/version.py').read(),
 DESCRIPTION = 'Picta video downloader'
 LONG_DESCRIPTION = 'Command-line program to download videos from Picta.cu Plataforma de Contenidos Audiovisuales and YouTube.com'
 
-py2exe_console = [{
+
+class build_pyinstaller_exe(Command):
+    description = 'Build the executable'
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        spawn(
+            ['pyinstaller', './picta-dl.spec' ],
+            dry_run=self.dry_run,
+        )
+
+
+pyinstaller_console = [{
     'script': './picta_dl/__main__.py',
     'dest_base': 'picta-dl',
     'version': __version__,
@@ -51,15 +63,15 @@ py2exe_console = [{
     'product_version': __version__,
 }]
 
-py2exe_params = {
-    'console': py2exe_console,
-    'options': {'py2exe': py2exe_options},
-    'zipfile': None
+pyinstaller_cmd = {
+    'pyinstaller': build_pyinstaller_exe,
 }
 
-if len(sys.argv) >= 2 and sys.argv[1] == 'py2exe':
-    params = py2exe_params
+if len(sys.argv) >= 2 and sys.argv[1] == 'pyinstaller':
+    make_executalble = True
+    params = dict()
 else:
+    make_executalble = False
     files_spec = [
         ('etc/bash_completion.d', ['picta-dl.bash-completion']),
         ('etc/fish/completions', ['picta-dl.fish']),
@@ -102,6 +114,12 @@ class build_lazy_extractors(Command):
             [sys.executable, 'devscripts/make_lazy_extractors.py', 'picta_dl/extractor/lazy_extractors.py'],
             dry_run=self.dry_run,
         )
+
+
+cmdclass={'build_lazy_extractors': build_lazy_extractors}
+
+if make_executalble:
+    cmdclass.update(pyinstaller_cmd)
 
 
 setup(
@@ -148,6 +166,6 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
     ],
 
-    cmdclass={'build_lazy_extractors': build_lazy_extractors},
+    cmdclass=cmdclass,
     **params
 )
