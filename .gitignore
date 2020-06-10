@@ -48,6 +48,7 @@ picta-dl.zsh
 
 tmp/
 venv/
+.env
 
 # VS Code related files
 .vscode
