@@ -48,7 +48,7 @@ class build_pyinstaller_exe(Command):
 
     def run(self):
         spawn(
-            ['pyinstaller', './picta-dl.spec' ],
+            ['pyinstaller', '-c', '-F', '--icon=assets/picta-dl.ico', '--name=picta-dl', 'picta_dl/__main__.py' ],
             dry_run=self.dry_run,
         )
 

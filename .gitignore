@@ -50,5 +50,7 @@ tmp/
 venv/
 .env
 
+*.spec
+
 # VS Code related files
 .vscode
