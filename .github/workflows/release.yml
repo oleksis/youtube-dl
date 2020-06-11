@@ -1,16 +1,16 @@
-name: Release Tag Artifacts
+name: Upload Release Asset
 
 on: 
   push:
     tags:
-      - v*
+      - 'v*'
 
 jobs:
-  build-windows:
+  build_windows_exe:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python
+    - name: Set up Python 3.7.7
       uses: actions/setup-python@v2
       with:
           python-version: '3.7.7'
@@ -19,26 +19,127 @@ jobs:
       run: pip install -r requirements.txt
     - name: Build PyInstaller
       run: python setup.py pyinstaller
-    - name: Create GitHub release
-      uses: Roang-zero1/github-upload-release-artifacts-action@master
-      with:
-        args: ./dist/picta-dl.exe
+    - name: Dump version
+      id: dump_version
+      shell: python
+      run: |
+        exec(compile(open('picta_dl/version.py').read(), 'picta_dl/version.py', 'exec'))
+        print('::set-output name=picta_version::' + __version__)
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  build-ubuntu:
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: picta-dl ${{ steps.dump_version.outputs.picta_version }}
+        draft: false
+        prerelease: false
+    - name: Output Release URL File
+      run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
+    - name: Save Release URL File for publish
+      uses: actions/upload-artifact@v1
+      with:
+        name: release_url
+        path: release_url.txt
+    - name: Upload Executable picta-dl.exe
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/picta-dl.exe
+        asset_name: picta-dl.exe
+        asset_content_type: application/octet-stream
+  build_ubuntu_bdist:  # https://github.community/t/upload-multi-assets-from-different-os-to-a-release/17031/2
+    needs: build_windows_exe
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python
+    - name: Set up Python 3.7.7
       uses: actions/setup-python@v2
       with:
-          python-version: '3.5.4'
+          python-version: '3.7.7'
           architecture: 'x64'
     - name: Build Binary Distribution
-      run: python setup.py bdist bdist_wheel
-    - name: Create GitHub release
-      uses: Roang-zero1/github-upload-release-artifacts-action@master
+      run: python setup.py bdist
+    - name: Dump version
+      id: dump_version
+      shell: python
+      run: |
+        exec(compile(open('picta_dl/version.py').read(), 'picta_dl/version.py', 'exec'))
+        print('::set-output name=picta_version::' + __version__)
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
       with:
-        args: ./dist/picta_dl*.tar.gz ./dist/picta_dl*.whl
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url.txt`
+        echo ::set-output name=upload_url::$value
+    - name: Upload Binary Distribution to Release
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+        asset_path: ./dist/picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
+        asset_name: picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
+        asset_content_type: application/octet-stream
+  make_sdist:
+    name: Make SDist
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.7
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7.7'
+          architecture: 'x64'
+    - name: Install deps
+      run: python -m pip install "setuptools>=42"
+    - name: Build Sdist
+      run: python setup.py sdist
+    - uses: actions/upload-artifact@v2
+      with:
+        path: dist/*.tar.gz
+  build_wheels:  # https://scikit-hep.org/developer/gha_wheels
+    name: Wheel on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.7
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7.7'
+          architecture: 'x64'
+    - name: Install cibuildwheel 1.4.2
+      run: python -m pip install cibuildwheel==1.4.2
+    - name: Build wheel
+      run: python -m cibuildwheel --output-dir wheelhouse
+      env:
+        CIBW_SKIP: pp* cp27-win* cp35-win*
+    - name: Upload wheels
+      uses: actions/upload-artifact@v2
+      with:
+        path: wheelhouse/*.whl
+  upload_all:
+    needs: [build_wheels, make_sdist]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: artifact
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.2.2
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_PASSWORD }}
