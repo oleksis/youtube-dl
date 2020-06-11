@@ -1,11 +1,9 @@
-name: Release Tag Artifacts
+name: Upload Release Asset
 
 on: 
   push:
     tags:
-      - v*
-  release:
-    types: [published]
+      - 'v*'
 
 jobs:
   build-windows:
@@ -21,13 +19,28 @@ jobs:
       run: pip install -r requirements.txt
     - name: Build PyInstaller
       run: python setup.py pyinstaller
-    - name: Create GitHub release
-      uses: Roang-zero1/github-upload-release-artifacts-action@master
-      with:
-        args: ./dist/picta-dl.exe
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/picta-dl.exe
+          asset_name: picta-dl.exe
+          asset_content_type: application/octet-stream
   build-ubuntu:
+    needs: build-windows
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -37,10 +50,10 @@ jobs:
           python-version: '3.5.4'
           architecture: 'x64'
     - name: Build Binary Distribution
-      run: python setup.py bdist bdist_wheel
+      run: python setup.py bdist
     - name: Create GitHub release
       uses: Roang-zero1/github-upload-release-artifacts-action@master
       with:
-        args: ./dist/picta_dl*.tar.gz ./dist/picta_dl*.whl
+        args: ./dist/picta_dl*.tar.gz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
