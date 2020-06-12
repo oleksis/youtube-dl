@@ -91,7 +91,7 @@ jobs:
         asset_content_type: application/octet-stream
   make_sdist:
     name: Make SDist
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.7.7
@@ -132,8 +132,7 @@ jobs:
         path: wheelhouse/*.whl
   upload_all:
     needs: [build_wheels, make_sdist]
-    name: Publishing to PyPi
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v2
       with:
