@@ -35,6 +35,13 @@ jobs:
         release_name: picta-dl ${{ steps.dump_version.outputs.picta_version }}
         draft: false
         prerelease: false
+    - name: Output Release URL File
+      run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
+    - name: Save Release URL File for publish
+      uses: actions/upload-artifact@v1
+      with:
+        name: release_url
+        path: release_url.txt
     - name: Upload Executable picta-dl.exe
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
@@ -63,14 +70,22 @@ jobs:
       run: |
         exec(compile(open('picta_dl/version.py').read(), 'picta_dl/version.py', 'exec'))
         print('::set-output name=picta_version::' + __version__)
+    - name: Load Release URL File from release job
+      uses: actions/download-artifact@v1
+      with:
+        name: release_url
+    - name: Get Release File Name & Upload URL
+      id: get_release_info
+      run: |
+        value=`cat release_url/release_url.txt`
+        echo ::set-output name=upload_url::$value
     - name: Upload Binary Distribution to Release
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_TAG: ${ GITHUB_REF#refs/tags/ }
       with:
-        upload_url: format('https://uploads.github.com/repos/oleksis/youtube-dl/releases/${0}/assets', $GITHUB_TAG)
+        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
         asset_path: ./dist/picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_name: picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_content_type: application/octet-stream
