@@ -70,7 +70,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_TAG: ${ GITHUB_REF#refs/tags/ }
       with:
-        upload_url: 'https://uploads.github.com/repos/oleksis/youtube-dl/releases/'${GITHUB_TAG}'/assets'
+        upload_url: 'https://uploads.github.com/repos/oleksis/youtube-dl/releases/${{ github.event.push.tag_name }}/assets'
         asset_path: ./dist/picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_name: picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_content_type: application/octet-stream
