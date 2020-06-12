@@ -132,7 +132,6 @@ jobs:
         path: wheelhouse/*.whl
   upload_all:
     needs: [build_wheels, make_sdist]
-    name: Publishing to PyPi
     runs-on: ubuntu-latest
 
     - uses: actions/download-artifact@v2
