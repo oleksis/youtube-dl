@@ -108,7 +108,7 @@ jobs:
         path: dist/*.tar.gz
   build_wheels:  # https://scikit-hep.org/developer/gha_wheels
     name: Wheel on ${{ matrix.os }}
-    run-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
