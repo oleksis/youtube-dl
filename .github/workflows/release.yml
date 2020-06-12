@@ -7,7 +7,6 @@ on:
 
 jobs:
   build-windows:
-    id: build_windows
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -65,7 +64,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ build_windows.steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/picta_dl-${{ build_windows.steps.dump_version.outputs.picta_version }}-py2.py3-none-any.whl
-        asset_name: picta_dl-${{ build_windows.steps.dump_version.outputs.picta_version }}-py2.py3-none-any.whl
+        upload_url: ${{ build-windows.steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/picta_dl-${{ build-windows.steps.dump_version.outputs.picta_version }}-py2.py3-none-any.whl
+        asset_name: picta_dl-${{ build-windows.steps.dump_version.outputs.picta_version }}-py2.py3-none-any.whl
         asset_content_type: application/octet-stream
