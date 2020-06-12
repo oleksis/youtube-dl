@@ -6,11 +6,11 @@ on:
       - 'v*'
 
 jobs:
-  build-windows:
+  build_windows_exe:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python
+    - name: Set up Python 3.7.7
       uses: actions/setup-python@v2
       with:
           python-version: '3.7.7'
@@ -52,12 +52,12 @@ jobs:
         asset_path: ./dist/picta-dl.exe
         asset_name: picta-dl.exe
         asset_content_type: application/octet-stream
-  build-ubuntu:
-    needs: build-windows
+  build_ubuntu_bdist:  # https://github.community/t/upload-multi-assets-from-different-os-to-a-release/17031/2
+    needs: build_windows_exe
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python
+    - name: Set up Python 3.7.7
       uses: actions/setup-python@v2
       with:
           python-version: '3.7.7'
@@ -89,3 +89,57 @@ jobs:
         asset_path: ./dist/picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_name: picta_dl-${{ steps.dump_version.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_content_type: application/octet-stream
+  make_sdist:
+    name: Make SDist
+    run-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.7
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7.7'
+          architecture: 'x64'
+    - name: Install deps
+      run: python -m pip install "setuptools>=42"
+    - name: Build Sdist
+      run: python setup.py sdist
+    - uses: actions/upload-artifact@v2
+      with:
+        path: dist/*.tar.gz
+  build_wheels:  # https://scikit-hep.org/developer/gha_wheels
+    name: Wheel on ${{ matrix.os }}
+    run-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.7
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7.7'
+          architecture: 'x64'
+    - name: Install cibuildwheel 1.4.2
+      run: python -m pip install cibuildwheel==1.4.2
+    - name: Build wheel
+      run: python -m cibuildwheel --output-dir wheelhouse
+      env: CIBW_SKIP: pp* cp27-win* cp35-win*
+    - name: Upload wheels
+      uses: actions/upload-artifact@v2
+      with:
+        path: wheelhouse/*.whl
+  upload_all:
+    needs: [build_wheels, make_sdist]
+    name: Publishing to PyPi
+    runs-on: ubuntu-latest
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: artifact
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.2.2
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_PASSWORD }}
