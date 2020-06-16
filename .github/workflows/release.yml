@@ -23,6 +23,7 @@ jobs:
       id: dump_version
       shell: python
       run: |
+        import json
         import re
         
         exec(compile(open('picta_dl/version.py').read(), 'picta_dl/version.py', 'exec'))
@@ -33,6 +34,7 @@ jobs:
             
         mobj = re.search(r'(?s)version %s\n{2}(.+?)\n{3}' % __version__, changelog)
         body = mobj.group(1) if mobj else ''
+        body = json.dumps(body).encode('utf-8').decode('utf-8').strip('"')
         print('::set-output name=picta_changelog::' + body)
     - name: Create Release
       id: create_release
