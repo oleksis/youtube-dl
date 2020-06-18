@@ -63,7 +63,7 @@ jobs:
         asset_content_type: application/octet-stream
     - name: Get SHA2-256SUMS for picta-dl.exe
       id: sha2_file
-      run: echo '::set-output name=sha2_windows::'${{ hashFiles('**.exe') }}
+      run: echo '::set-output name=sha2_windows::'${{ hashFiles('dist/picta-dl.exe') }}
   build_ubuntu_bdist:
     needs: build_windows_exe
     runs-on: ubuntu-latest
@@ -88,7 +88,7 @@ jobs:
         asset_content_type: application/octet-stream
     - name: Get SHA2-256SUMS for picta_dl*.tar.gz
       id: sha2_file
-      run: echo '::set-output name=sha2_ubuntu::'${{ hashFiles('**/dist/*.tar.gz') }}
+      run: echo '::set-output name=sha2_ubuntu::'${{ hashFiles('dist/*.tar.gz') }}
     - name: Make SHA2-256SUMS file
       run: |
         echo ${{ needs.build_windows_exe.outputs.sha2_windows }}' picta-dl.exe' > SHA2-256SUMS
