@@ -1,7 +1,8 @@
-version 2020.6.17.1
+version 2020.6.17.2
 
-* Update icon picta-dl.ico
+* Fix dump SHA2-256SUMS on Windows
 * Add SHA2-256SUMS file
+* Update icon picta-dl.ico
 
 
 version 2020.6.16.2
