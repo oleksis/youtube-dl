@@ -1,4 +1,4 @@
-version 2020.6.18.1
+version 2020.6.18.2
 
 * Fix dump SHA2-256SUMS on Windows
 * Add SHA2-256SUMS file
