@@ -1,3 +1,10 @@
+version 2020.6.23
+
+* Add picta-dl binary GNU/Linux (x86_64 with ubuntu-latest)
+* Add SHA2-256SUMS picta-dl binary
+* Update README.md
+
+
 version 2020.6.18.3
 
 * Fix dump SHA2-256SUMS on Windows
