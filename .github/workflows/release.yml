@@ -65,7 +65,7 @@ jobs:
       id: sha2_file
       env:
         SHA2: ${{ hashFiles('dist/picta-dl.exe') }}
-      run: echo "::set-output name=sha2_windows::$SHA2"
+      run: echo "::set-output name=sha2_windows::${env:SHA2}"
   build_ubuntu_bdist:
     needs: build_windows_exe
     runs-on: ubuntu-latest

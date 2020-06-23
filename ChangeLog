@@ -1,4 +1,4 @@
-version 2020.6.23
+version 2020.6.23.1
 
 * Add picta-dl binary GNU/Linux (x86_64 with ubuntu-latest)
 * Add SHA2-256SUMS picta-dl binary
