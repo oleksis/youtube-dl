@@ -30,16 +30,18 @@ try:
     # This will create an exe that needs Microsoft Visual C++ 2008
     # Redistributable Package
     import PyInstaller
-    from PyInstaller.utils.win32.versioninfo import (
-        VarStruct,
-        VarFileInfo,
-        StringStruct,
-        StringTable,
-        StringFileInfo,
-        FixedFileInfo,
-        VSVersionInfo,
-        SetVersion,
-    )
+    if PyInstaller.compat.is_win:
+        from PyInstaller.utils.win32.versioninfo import (
+            VarStruct,
+            VarFileInfo,
+            StringStruct,
+            StringTable,
+            StringFileInfo,
+            FixedFileInfo,
+            VSVersionInfo,
+            SetVersion,
+        )
+
 
     def version2tuple(commit=0):
         version_list = str(__version__).split(".")
@@ -60,41 +62,43 @@ try:
 
         description = "Build the executable"
         user_options = []
-        version_file = VSVersionInfo(
-            ffi=FixedFileInfo(
-                filevers=version2tuple(),
-                prodvers=version2tuple(),
-                mask=0x3F,
-                flags=0x0,
-                OS=0x4,
-                fileType=0x1,
-                subtype=0x0,
-                date=(0, 0),
-            ),
-            kids=[
-                VarFileInfo([VarStruct("Translation", [0, 1200])]),
-                StringFileInfo(
-                    [
-                        StringTable(
-                            "000004b0",
-                            [
-                                StringStruct("CompanyName", "oleksis.fraga@gmail.com"),
-                                StringStruct("FileDescription", DESCRIPTION),
-                                StringStruct("FileVersion", version2str()),
-                                StringStruct("InternalName", "picta-dl.exe"),
-                                StringStruct(
-                                    "LegalCopyright",
-                                    "https://github.com/oleksis/youtube-dl/tree/picta-dl/LICENSE",
-                                ),
-                                StringStruct("OriginalFilename", "picta-dl.exe"),
-                                StringStruct("ProductName", "Picta-DL"),
-                                StringStruct("ProductVersion", version2str()),
-                            ],
-                        )
-                    ]
+        version_file = None
+        if PyInstaller.compat.is_win:
+            version_file = VSVersionInfo(
+                ffi=FixedFileInfo(
+                    filevers=version2tuple(),
+                    prodvers=version2tuple(),
+                    mask=0x3F,
+                    flags=0x0,
+                    OS=0x4,
+                    fileType=0x1,
+                    subtype=0x0,
+                    date=(0, 0),
                 ),
-            ],
-        )
+                kids=[
+                    VarFileInfo([VarStruct("Translation", [0, 1200])]),
+                    StringFileInfo(
+                        [
+                            StringTable(
+                                "000004b0",
+                                [
+                                    StringStruct("CompanyName", "oleksis.fraga@gmail.com"),
+                                    StringStruct("FileDescription", DESCRIPTION),
+                                    StringStruct("FileVersion", version2str()),
+                                    StringStruct("InternalName", "picta-dl.exe"),
+                                    StringStruct(
+                                        "LegalCopyright",
+                                        "https://github.com/oleksis/youtube-dl/tree/picta-dl/LICENSE",
+                                    ),
+                                    StringStruct("OriginalFilename", "picta-dl.exe"),
+                                    StringStruct("ProductName", "Picta-DL"),
+                                    StringStruct("ProductVersion", version2str()),
+                                ],
+                            )
+                        ]
+                    ),
+                ],
+            )
 
         def initialize_options(self):
             pass
@@ -109,13 +113,14 @@ try:
                     "-c",
                     "-F",
                     "--icon=assets/picta-dl.ico",
+					"--exclude-module=test",
                     "--name=picta-dl",
                     "picta_dl/__main__.py",
                 ],
                 dry_run=self.dry_run,
             )
-            SetVersion("./dist/picta-dl.exe", version)
-
+            if version:
+                SetVersion("./dist/picta-dl.exe", version)
 
 except ImportError:
     if len(sys.argv) >= 2 and sys.argv[1] == "pyinstaller":

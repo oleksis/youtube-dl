@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.org/ytdl-org/youtube-dl)
 
-picta-dl - download videos from picta.cu Plataforma de Contenidos Audiovisuales and youtube.com
+picta-dl - Download videos from Picta.cu Plataforma de Contenidos Audiovisuales and Youtube.com
 
 - [INSTALLATION](#installation)
 - [DESCRIPTION](#description)
@@ -19,21 +19,21 @@ picta-dl - download videos from picta.cu Plataforma de Contenidos Audiovisuales 
 
 To install it right away for all UNIX users (Linux, macOS, etc.), type:
 
-    sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-    sudo chmod a+rx /usr/local/bin/youtube-dl
+    sudo curl -L https://github.com/oleksis/youtube-dl/releases/download/v2020.6.23/picta-dl -o /usr/local/bin/picta-dl
+    sudo chmod a+rx /usr/local/bin/picta-dl
 
 If you do not have curl, you can alternatively use a recent wget:
 
-    sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-    sudo chmod a+rx /usr/local/bin/youtube-dl
+    sudo wget https://github.com/oleksis/youtube-dl/releases/download/v2020.6.23/picta-dl -O /usr/local/bin/picta-dl
+    sudo chmod a+rx /usr/local/bin/picta-dl
 
-Windows users can [download an .exe file](https://yt-dl.org/latest/youtube-dl.exe) and place it in any location on their [PATH](https://en.wikipedia.org/wiki/PATH_%28variable%29) except for `%SYSTEMROOT%\System32` (e.g. **do not** put in `C:\Windows\System32`).
+Windows users can [download an .exe file](https://github.com/oleksis/youtube-dl/releases/download/v2020.6.23/picta-dl.exe) and place it in any location on their [PATH](https://en.wikipedia.org/wiki/PATH_%28variable%29) except for `%SYSTEMROOT%\System32` (e.g. **do not** put in `C:\Windows\System32`).
 
 You can also use pip:
 
     sudo -H pip install --upgrade picta-dl
     
-This command will update picta-dl if you have already installed it. See the [pypi page](https://pypi.python.org/pypi/youtube_dl) for more information.
+This command will update picta-dl if you have already installed it. See the [pypi page](https://pypi.python.org/pypi/picta_dl) for more information.
 
 macOS users can install picta-dl with [Homebrew](https://brew.sh/):
 
@@ -42,6 +42,13 @@ macOS users can install picta-dl with [Homebrew](https://brew.sh/):
 Or with [MacPorts](https://www.macports.org/):
 
     sudo port install picta-dl
+	
+## EXTRA
+The users can install [FFmpeg](https://www.ffmpeg.org/download.html ) for join the Video and Audio.
+
+```bash
+$ ffmpeg -i video.mp4 -i audio.m4a -c:v copy -c:a copy output.mp4
+```
 
 Alternatively, refer to the [developer instructions](#developer-instructions) for how to check out and work with the git repository. For further options, including PGP signatures, see the [youtube-dl Download Page](https://ytdl-org.github.io/youtube-dl/download.html).
 
@@ -949,7 +956,7 @@ picta-dl is an open-source project manned by too few volunteers, so we'd rather 
 
 # DEVELOPER INSTRUCTIONS
 
-Most users do not need to build picta-dl and can [download the builds](https://ytdl-org.github.io/youtube-dl/download.html) or get them from their distribution.
+Most users do not need to build picta-dl and can [download the builds](https://github.com/oleksis/youtube-dl/releases/latest) or get them from their distribution.
 
 To run picta-dl as a developer, you don't need to build anything either. Simply execute
 
