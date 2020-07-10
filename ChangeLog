@@ -1,3 +1,10 @@
+version 2020.7.9
+
+* Add PictaPlaylist extractor
+* Option --no-playlist by default is True
+* Update README.md
+
+
 version 2020.6.23.1
 
 * Add picta-dl binary GNU/Linux (x86_64 with ubuntu-latest)
