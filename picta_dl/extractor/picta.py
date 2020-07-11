@@ -58,7 +58,7 @@ class PictaIE(PictaBaseIE):
     IE_NAME = "picta"
     IE_DESC = "Picta videos"
     _VALID_URL = (
-        r"https?://(?:www\.)?picta\.cu/(?:medias|embed|playlist)/(?:\?v=)?(?P<id>[\da-z-]+)"
+        r"https?://(?:www\.)?picta\.cu/(?:medias|embed)/(?:\?v=)?(?P<id>[\da-z-]+)"
     )
 
     _TESTS = [

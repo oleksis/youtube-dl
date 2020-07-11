@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.org/ytdl-org/youtube-dl)
+![Build Status](https://github.com/oleksis/youtube-dl/workflows/Upload%20Release%20Asset%20-%20PyPi%20Publish/badge.svg)
 
 picta-dl - Download videos from Picta.cu Plataforma de Contenidos Audiovisuales and Youtube.com
 
