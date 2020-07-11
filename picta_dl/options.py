@@ -334,7 +334,7 @@ def parseOpts(overrideArguments=None):
         help='Download only the video, if the URL refers to a video and a playlist.')
     selection.add_option(
         '--yes-playlist',
-        action='store_false', dest='noplaylist', default=True,
+        action='store_false', dest='noplaylist', default=False,
         help='Download the playlist, if the URL refers to a video and a playlist.')
     selection.add_option(
         '--age-limit',
