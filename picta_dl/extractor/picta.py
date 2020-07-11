@@ -126,13 +126,7 @@ class PictaIE(PictaBaseIE):
         if info["playlist_channel"] and self.playlist_id is None:
             playlist_id = info["playlist_channel"].get("id")
             self.playlist_id = playlist_id
-
-        # Check options.py line 337 '--yes-playlist' default=True
-        if self._downloader.params.get('noplaylist'):
-            if playlist_id:
-                self.to_screen('Downloading just video %s because of --no-playlist default is True' % video_id)
-            playlist_id = None
-
+        # Download Playlist (--yes-playlist) in first place
         if playlist_id and not self._downloader.params.get('noplaylist'):
             self.to_screen('Downloading playlist %s - add --no-playlist to just download video' % playlist_id)
             return self.url_result(
@@ -140,6 +134,8 @@ class PictaIE(PictaBaseIE):
                 PictaPlaylistIE.ie_key(),
                 playlist_id
             )
+        elif self._downloader.params.get('noplaylist'):
+            self.to_screen('Downloading just video %s because of --no-playlist' % video_id)
 
         formats = []
         # MPD manifest
