@@ -6,6 +6,7 @@ from __future__ import print_function
 import os.path
 import warnings
 import sys
+import time
 
 try:
     from setuptools import setup, Command
@@ -59,7 +60,7 @@ def version2str(commit=0):
     return "%s.%s.%s.%s" % version_tuple
 
 
-class build_pyinstaller_exe(Command):
+class BuildPyinstallerBin(Command):
 
     description = "Build the executable"
     user_options = []
@@ -121,6 +122,7 @@ class build_pyinstaller_exe(Command):
             dry_run=self.dry_run,
         )
         if version:
+            time.sleep(3)
             SetVersion("./dist/picta-dl.exe", version)
 
 
@@ -139,7 +141,7 @@ pyinstaller_console = [
 
 if len(sys.argv) >= 2 and sys.argv[1] == "pyinstaller":
     make_executable = True
-    pyinstaller_cmd.update({"pyinstaller": build_pyinstaller_exe})
+    pyinstaller_cmd.update({"pyinstaller": BuildPyinstallerBin})
     params = dict()
 else:
     make_executable = False
