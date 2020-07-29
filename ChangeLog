@@ -1,6 +1,10 @@
-version 2020.7.11
+version 2020.7.28
 
-* Download Playlist (--yes-playlist) in first place
+Extractors
+* [youtube] Fix sigfunc name extraction (#26134, #26135, #26136, #26137)
+* [youtube] Improve description extraction (#25937, #25980)
+* [youtube] Prevent excess HTTP 301 (#25786)
++ [youtube:playlists] Extend URL regular expression (#25810)
 
 
 version 2020.7.9
