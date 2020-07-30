@@ -29,7 +29,7 @@ def rsa_verify(message, signature, key):
     return expected == signature
 
 
-def update_self(to_screen, verbose, opener):
+def _update_self(to_screen, verbose, opener):
     """Update the program file with the latest version from the repository"""
 
     UPDATE_URL = 'https://yt-dl.org/update/'
@@ -170,6 +170,85 @@ start /b "" cmd /c del "%%~f0"&exit /b"
                 to_screen(encode_compat_str(traceback.format_exc()))
             to_screen('ERROR: unable to overwrite current version')
             return
+
+    to_screen('Updated picta-dl. Restart picta-dl to use the new version.')
+
+
+def on_windows():
+    """Returns True if OS is Windows."""
+    return os.name == 'nt'
+
+
+def update_self(to_screen, verbose, opener):
+    """Update the program file with the latest version from GITHUB"""
+
+    GITHUB_API = "https://api.github.com/"
+    JSON_URL = GITHUB_API + 'repos/oleksis/youtube-dl/releases/latest'
+
+    if not isinstance(globals().get('__loader__'), zipimporter) and not hasattr(sys, 'frozen'):
+        to_screen('It looks like you installed picta-dl with a package manager, pip, setup.py or a tarball. Please use that to update.')
+        return
+
+    # Download and check versions info
+    try:
+        latest_info = opener.open(JSON_URL).read().decode('utf-8')
+        latest_info = json.loads(latest_info)
+        assets_info = latest_info['assets']
+        file_name = 'picta-dl' if not on_windows() else 'picta-dl.exe'
+    except Exception:
+        if verbose:
+            to_screen(encode_compat_str(traceback.format_exc()))
+        to_screen('ERROR: can\'t obtain versions info. Please try again later.')
+        return
+
+    version_id_url = assets_info[0]['browser_download_url']
+    version_id = version_id_url.split('/')[-2]
+    # Delete v character
+    version_id = version_id[1:]
+
+    def version_tuple(version_str):
+        return tuple(map(int, version_str.split('.')))
+
+    if version_tuple(__version__) >= version_tuple(version_id):
+        to_screen('picta-dl is up to date (%s)' % __version__)
+        return
+
+    to_screen('Updating to version ' + version_id + ' ...')
+
+    # sys.executable is set to the full pathname of the exe-file for py2exe
+    # though symlinks are not followed so that we need to do this manually
+    # with help of realpath
+    filename = compat_realpath(sys.executable if hasattr(sys, 'frozen') else sys.argv[0])
+
+    if not os.access(filename, os.W_OK):
+        to_screen('ERROR: no write permissions on %s' % filename)
+        return
+
+    version = None
+
+    for asset in assets_info:
+        if asset['name'] == file_name:
+            version = asset['browser_download_url']
+            break
+
+    try:
+        urlh = opener.open(version)
+        newcontent = urlh.read()
+        urlh.close()
+    except (IOError, OSError):
+        if verbose:
+            to_screen(encode_compat_str(traceback.format_exc()))
+        to_screen('ERROR: unable to download latest version')
+        return
+
+    try:
+        with open(filename, 'wb') as outf:
+            outf.write(newcontent)
+    except (IOError, OSError):
+        if verbose:
+            to_screen(encode_compat_str(traceback.format_exc()))
+        to_screen('ERROR: unable to overwrite current version')
+        return
 
     to_screen('Updated picta-dl. Restart picta-dl to use the new version.')
 

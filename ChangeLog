@@ -1,3 +1,10 @@
+version 2020.7.29.1
+
+Core
+* [utils] Fix Codecs Parameter String for Picta (vp09.00.[dd].08)
+* [update] Update self picta-dl from GitHub latest version
+
+
 version 2020.7.28
 
 Extractors
