@@ -14,6 +14,10 @@ Extractors
 + [youtube:playlists] Extend URL regular expression (#25810)
 
 
+version 2020.7.11
+* Download Playlist (--yes-playlist) in first place
+
+
 version 2020.7.9
 
 * Add PictaPlaylist extractor
