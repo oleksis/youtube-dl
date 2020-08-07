@@ -94,8 +94,10 @@ jobs:
         asset_path: ./dist/picta_dl-${{ needs.build_windows_exe.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_name: picta_dl-${{ needs.build_windows_exe.outputs.picta_version }}.linux-x86_64.tar.gz
         asset_content_type: application/octet-stream
-    - name: Build PyInstaller
-      run: python setup.py pyinstaller
+    - name: Build Binary using PyInstaller ManyLinux 2014 Docker Action
+      uses: oleksis/pyinstaller-manylinux@v1
+      with:
+        pyinstaller-params: [-c, -F, --icon=assets/picta-dl.ico, --exclude-module=test, --name=picta-dl, picta_dl/__main__.py]
     - name: Upload Binary Distribution to Release
       id: upload-release-binary 
       uses: actions/upload-release-asset@v1
