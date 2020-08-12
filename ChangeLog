@@ -1,3 +1,9 @@
+version 2020.8.12
+
+Extractors
+* [picta] Add PictaChannelPlaylistIE, PictaUserPlaylistIE
+
+
 version 2020.8.8
 
 * Update Github Action release for GNU/Linux binary for ManyLinux 2014
