@@ -13,7 +13,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from test.helper import gettestcases
 
 from picta_dl.extractor import (
-    FacebookIE,
     gen_extractors,
     YoutubeIE,
 )
