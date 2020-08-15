@@ -194,7 +194,6 @@ def update_self(to_screen, verbose, opener):
         latest_info = opener.open(JSON_URL).read().decode('utf-8')
         latest_info = json.loads(latest_info)
         assets_info = latest_info['assets']
-        file_name = 'picta-dl' if not on_windows() else 'picta-dl.exe'
     except Exception:
         if verbose:
             to_screen(encode_compat_str(traceback.format_exc()))
@@ -219,15 +218,16 @@ def update_self(to_screen, verbose, opener):
     # though symlinks are not followed so that we need to do this manually
     # with help of realpath
     filename = compat_realpath(sys.executable if hasattr(sys, 'frozen') else sys.argv[0])
+    directory = os.path.dirname(filename)
 
-    if not os.access(filename, os.W_OK):
+    if not os.access(directory, os.W_OK):
         to_screen('ERROR: no write permissions on %s' % filename)
         return
 
     version = None
 
     for asset in assets_info:
-        if asset['name'] == file_name:
+        if asset['name'] == filename:
             version = asset['browser_download_url']
             break
 
@@ -242,15 +242,30 @@ def update_self(to_screen, verbose, opener):
         return
 
     try:
-        with open(filename, 'wb') as outf:
-            outf.write(newcontent)
+        with open(filename + '.new', 'wb') as out_file:
+            out_file.write(newcontent)
     except (IOError, OSError):
-        if verbose:
-            to_screen(encode_compat_str(traceback.format_exc()))
-        to_screen('ERROR: unable to overwrite current version')
+        print('ERROR: unable to write the new version')
         return
 
-    to_screen('Updated picta-dl. Restart picta-dl to use the new version.')
+    cmd_shell = 'cmd' if on_windows() else 'bash'
+    params = '/c' if on_windows() else '-c'
+
+    if on_windows():
+        script = (
+            'ping 127.0.0.1 -n 5 -w 1000 > NUL & '
+            'move /Y %s.new %s > NUL & '
+        ) % (filename, filename)
+    else:
+        script = (
+            'ping 127.0.0.1 -c 5 -W 1000 > /dev/null ; '
+            'mv -f %s.new %s > /dev/null ; '
+        ) % (filename, filename)
+
+    script += 'echo Updated picta-dl to version %s \r\n' % version_id
+
+    subprocess.Popen([cmd_shell, params, script])  # Continues to run in the background
+    return  # Do not show premature success messages
 
 
 def get_notes(versions, fromVersion):

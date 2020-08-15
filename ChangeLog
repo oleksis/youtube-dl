@@ -1,3 +1,12 @@
+version 2020.8.15
+
+Core
+* [update] Fix update self picta-dl
+
+Extractors
+* [picta] Improved PictaPlaylist Extractors
+
+
 version 2020.8.12
 
 Extractors
