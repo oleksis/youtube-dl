@@ -1,3 +1,9 @@
+version 2020.8.17
+
+Extractors
+* [picta] Extract subtitles if available
+
+
 version 2020.8.15
 
 Core
