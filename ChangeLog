@@ -1,4 +1,7 @@
-version 2020.8.17
+version 2020.8.17.1
+
+Core
+* [update] Fix bug in update self picta-dl
 
 Extractors
 * [picta] Extract subtitles if available

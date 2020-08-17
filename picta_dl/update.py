@@ -194,6 +194,7 @@ def update_self(to_screen, verbose, opener):
         latest_info = opener.open(JSON_URL).read().decode('utf-8')
         latest_info = json.loads(latest_info)
         assets_info = latest_info['assets']
+        file_name = 'picta-dl.exe' if on_windows() else 'picta-dl'
     except Exception:
         if verbose:
             to_screen(encode_compat_str(traceback.format_exc()))
@@ -227,7 +228,7 @@ def update_self(to_screen, verbose, opener):
     version = None
 
     for asset in assets_info:
-        if asset['name'] == filename:
+        if asset['name'] == file_name:
             version = asset['browser_download_url']
             break
 
