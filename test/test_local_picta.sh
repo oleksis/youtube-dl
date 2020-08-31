@@ -44,6 +44,10 @@ echo "No PlayList options, Download Just the Video. No Error"
 python picta_dl/__main__.py -s -u "$USER" -p "$PASSWORD" --no-playlist https://www.picta.cu/medias/201-paradigma-devops-implementacion-tecnomatica-2020-07-05-22-44-41-299736?playlist=4441
 echo ""
 
+echo "Movie URL path"
+python picta_dl/__main__.py -s https://www.picta.cu/movie/phineas-ferb-pelicula-candace-universo-2020-08-28-21-00-32-857026
+echo ""
+
 echo "Run Test No Duplicates"
 python -m unittest test.test_all_urls.TestAllURLsMatching.test_no_duplicates
 echo ""
