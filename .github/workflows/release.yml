@@ -2,8 +2,6 @@ name: Upload Release Asset - PyPi Publish
 
 on: 
   push:
-    branches:
-      - picta-dl
     tags:
       - 'v*'
 
