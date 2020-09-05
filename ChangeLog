@@ -1,4 +1,4 @@
-version 2020.9.5
+version 2020.9.5.1
 
 Core
 + [postprocessor/embedthumbnail] Fix Youtube´s WebP (#25717)
