@@ -1,0 +1,143 @@
+name: Rolling Release
+
+on: 
+  push:
+    branches:
+      - rolling
+    tags:
+      - 'v*'
+
+jobs:
+  build_windows_exe:
+    runs-on: windows-latest
+    outputs:
+      youtube_version: ${{ steps.dump_version.outputs.youtube_version }}
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      sha2_windows: ${{ steps.sha2_file.outputs.sha2_windows }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.7
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7.7'
+          architecture: 'x64'
+    - name: Install Requirements
+      run: pip install -r requirements.txt
+    - name: Build PyInstaller
+      run: python setup.py pyinstaller
+    - name: Dump version and release body
+      id: dump_version
+      shell: python
+      run: |
+        import json
+        import re
+        
+        exec(compile(open('youtube_dl/version.py').read(), 'youtube_dl/version.py', 'exec'))
+        print('::set-output name=youtube_version::' + __version__)
+        
+        with open('ChangeLog', encoding='utf-8') as inf:
+            changelog = inf.read()
+            
+        mobj = re.search(r'(?s)version %s\n{2}(.+?)\n{3}' % __version__, changelog)
+        body = mobj.group(1) if mobj else ''
+        body = json.dumps(body).encode('utf-8').decode('utf-8')
+        print('::set-output name=youtube_changelog::' + body)
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: youtube-dl ${{ steps.dump_version.outputs.youtube_version }}
+        commitish: rolling
+        body: ${{ fromJson(steps.dump_version.outputs.youtube_changelog) }}
+        draft: false
+        prerelease: false
+    - name: Upload Executable youtube-dl.exe
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/youtube-dl.exe
+        asset_name: youtube-dl.exe
+        asset_content_type: application/octet-stream
+    - name: Get SHA2-256SUMS for youtube-dl.exe
+      id: sha2_file
+      env:
+        SHA2: ${{ hashFiles('dist/youtube-dl.exe') }}
+      run: echo "::set-output name=sha2_windows::${env:SHA2}"
+  build_ubuntu_bdist:
+    needs: build_windows_exe
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.7
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7.7'
+          architecture: 'x64'
+    - name: Install Requirements
+      run: pip install -r requirements.txt
+    - name: Install packages Ubuntu for ManPages
+      run: sudo apt-get -y install zip pandoc man
+    - name: Run Make
+      run: make
+    - name: Build Binary Distribution
+      run: python setup.py bdist
+    - name: Upload Tar-Gz Distribution to Release
+      id: upload-release-targz 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.build_windows_exe.outputs.upload_url }}
+        asset_path: ./dist/youtube_dl-${{ needs.build_windows_exe.outputs.youtube_version }}.linux-x86_64.tar.gz
+        asset_name: youtube_dl-${{ needs.build_windows_exe.outputs.youtube_version }}.linux-x86_64.tar.gz
+        asset_content_type: application/octet-stream
+    - name: Build Binary using PyInstaller ManyLinux 2014 Docker Action
+      uses: oleksis/pyinstaller-manylinux@v1
+      with:
+        pyinstaller-params: "['-c', '-F', '--icon=assets/youtube-dl.ico', '--exclude-module=test', '--name=youtube-dl', 'youtube_dl/__main__.py']"
+    - name: Upload Binary Distribution to Release
+      id: upload-release-binary 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.build_windows_exe.outputs.upload_url }}
+        asset_path: ./dist/youtube-dl
+        asset_name: youtube-dl
+        asset_content_type: application/octet-stream
+    - name: Get SHA2-256SUMS for youtube_dl*.tar.gz
+      id: sha2_file_targz
+      env:
+        SHA2: ${{ hashFiles('dist/*.tar.gz') }}
+      run: echo "::set-output name=sha2_ubuntu::$SHA2"
+    - name: Get SHA2-256SUMS for youtube-dl
+      id: sha2_file_binary
+      env:
+        SHA2: ${{ hashFiles('dist/youtube-dl') }}
+      run: echo "::set-output name=sha2_ubuntu::$SHA2"
+    - name: Make SHA2-256SUMS file
+      env:
+        SHA2_WINDOWS: ${{ needs.build_windows_exe.outputs.sha2_windows }}
+        SHA2_UBUNTU_TARGZ: ${{ steps.sha2_file_targz.outputs.sha2_ubuntu }}
+        SHA2_UBUNTU_BINARY: ${{ steps.sha2_file_binary.outputs.sha2_ubuntu }}
+        YOUTUBE_VERSION: ${{ needs.build_windows_exe.outputs.youtube_version }}
+      run: |
+        echo "$SHA2_WINDOWS youtube-dl.exe" > SHA2-256SUMS
+        echo "$SHA2_UBUNTU_BINARY youtube-dl" >> SHA2-256SUMS
+        echo "$SHA2_UBUNTU_TARGZ youtube_dl-$YOUTUBE_VERSION.linux-x86_64.tar.gz" >> SHA2-256SUMS
+    - name: Upload SHA2-256SUMS to Release
+      id: upload-release-sha2 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.build_windows_exe.outputs.upload_url }}
+        asset_path: ./SHA2-256SUMS
+        asset_name: SHA2-256SUMS
+        asset_content_type: text/plain

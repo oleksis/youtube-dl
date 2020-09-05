@@ -1,3 +1,12 @@
+version 2020.9.5
+
+Core
+* [setup] Change py2exe for PyInstaller
++ [.github/workflows/release.yml] Rolling Release using Github Actions
++ [assets/youtube-dl.ico] Add icon from youtube-dlg
++ [postprocessor/embedthumbnail] Fix Youtube´s WebP (#25717)
+
+
 version 2020.07.28
 
 Extractors
