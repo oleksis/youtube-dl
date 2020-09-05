@@ -1,3 +1,9 @@
+version 2020.9.5
+
+Core
++ [postprocessor/embedthumbnail] Fix Youtube´s WebP (#25717)
+
+
 version 2020.8.31
 
 Extractors
