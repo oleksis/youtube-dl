@@ -1,3 +1,13 @@
+version 2020.9.6
+
+Core
+[utils] Recognize wav mimetype (#26463)
+
+Extractors
+[youtube] Fix age gate content detection (#26100, #26152, #26311, #26384)
+[youtube:user] Extend URL regular expression (#26443)
+
+
 version 2020.9.5.1
 
 Core
