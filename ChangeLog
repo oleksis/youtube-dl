@@ -1,3 +1,13 @@
+version 2020.9.14
+
+Core
++ [postprocessor/embedthumbnail] Add support for non jpg/png thumbnails
+  (#25687, #25717)
+
+Extractors
+* [youtube] Fix empty description extraction (#26575, #26006)
+
+
 version 2020.9.6
 
 Core
