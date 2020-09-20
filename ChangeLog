@@ -1,3 +1,16 @@
+version 2020.9.20
+
+Core
+* [extractor/common] Relax interaction count extraction in _json_ld
++ [extractor/common] Extract author as uploader for VideoObject in _json_ld
+* [downloader/hls] Fix incorrect end byte in Range HTTP header for
+  media segments with EXT-X-BYTERANGE (#14748, #24512)
+* [extractor/common] Handle ssl.CertificateError in _request_webpage (#26601)
+* [downloader/http] Improve timeout detection when reading block of data
+  (#10935)
+* [downloader/http] Retry download when urlopen times out (#10935, #26603)
+
+
 version 2020.9.14
 
 Core
